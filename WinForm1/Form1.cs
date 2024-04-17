@@ -38,7 +38,7 @@ namespace WinForm1
             //copiar contenido txtbDescripcion
             art.descripcion = txtbDescripcion.Text;
             //copiar contenido txtbMarca
-            art.marca = cbbMarca.Text;
+            //art.marca = cbbMarca.Text;
             //copiar contenido txtbPrecio
             art.precio = float.Parse(txtbPrecio.Text);
             //copiar contenido cbbCategoria

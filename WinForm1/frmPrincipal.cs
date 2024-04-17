@@ -28,5 +28,17 @@ namespace WinForm1
             AgregarArticulo.ShowDialog();
 
         }
+
+        private void ModificarArticulo_Click(object sender, EventArgs e)
+        {
+            frmModificarArticulo ModificarArticulo = new frmModificarArticulo();
+            ModificarArticulo.ShowDialog();
+        }
+
+        private void BusquedaArticulos_Click(object sender, EventArgs e)
+        {
+            frmBusquedaArticulo BusquedaArticulos = new frmBusquedaArticulo();
+            BusquedaArticulos.ShowDialog();
+        }
     }
 }

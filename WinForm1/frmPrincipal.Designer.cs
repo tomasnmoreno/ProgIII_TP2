@@ -45,18 +45,20 @@
             this.TituloModulo.BackColor = System.Drawing.SystemColors.Menu;
             this.TituloModulo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.TituloModulo.Font = new System.Drawing.Font("Microsoft Tai Le", 21.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TituloModulo.Location = new System.Drawing.Point(43, 27);
+            this.TituloModulo.Location = new System.Drawing.Point(57, 33);
+            this.TituloModulo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.TituloModulo.Name = "TituloModulo";
-            this.TituloModulo.Size = new System.Drawing.Size(305, 39);
+            this.TituloModulo.Size = new System.Drawing.Size(384, 50);
             this.TituloModulo.TabIndex = 6;
             this.TituloModulo.Text = "Maestro de Artículos";
             // 
             // ListadoArticulos
             // 
             this.ListadoArticulos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.ListadoArticulos.Location = new System.Drawing.Point(43, 111);
+            this.ListadoArticulos.Location = new System.Drawing.Point(57, 137);
+            this.ListadoArticulos.Margin = new System.Windows.Forms.Padding(4);
             this.ListadoArticulos.Name = "ListadoArticulos";
-            this.ListadoArticulos.Size = new System.Drawing.Size(182, 23);
+            this.ListadoArticulos.Size = new System.Drawing.Size(243, 28);
             this.ListadoArticulos.TabIndex = 7;
             this.ListadoArticulos.Text = "Listado de artículos";
             this.ListadoArticulos.UseVisualStyleBackColor = true;
@@ -64,19 +66,22 @@
             // BusquedaArticulos
             // 
             this.BusquedaArticulos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.BusquedaArticulos.Location = new System.Drawing.Point(43, 162);
+            this.BusquedaArticulos.Location = new System.Drawing.Point(57, 199);
+            this.BusquedaArticulos.Margin = new System.Windows.Forms.Padding(4);
             this.BusquedaArticulos.Name = "BusquedaArticulos";
-            this.BusquedaArticulos.Size = new System.Drawing.Size(182, 23);
+            this.BusquedaArticulos.Size = new System.Drawing.Size(243, 28);
             this.BusquedaArticulos.TabIndex = 8;
             this.BusquedaArticulos.Text = "Búsqueda de Artículos";
             this.BusquedaArticulos.UseVisualStyleBackColor = true;
+            this.BusquedaArticulos.Click += new System.EventHandler(this.BusquedaArticulos_Click);
             // 
             // AgregarArticulo
             // 
             this.AgregarArticulo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.AgregarArticulo.Location = new System.Drawing.Point(43, 217);
+            this.AgregarArticulo.Location = new System.Drawing.Point(57, 267);
+            this.AgregarArticulo.Margin = new System.Windows.Forms.Padding(4);
             this.AgregarArticulo.Name = "AgregarArticulo";
-            this.AgregarArticulo.Size = new System.Drawing.Size(182, 23);
+            this.AgregarArticulo.Size = new System.Drawing.Size(243, 28);
             this.AgregarArticulo.TabIndex = 9;
             this.AgregarArticulo.Text = "Agregar Artículo";
             this.AgregarArticulo.UseVisualStyleBackColor = true;
@@ -85,19 +90,22 @@
             // ModificarArticulo
             // 
             this.ModificarArticulo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.ModificarArticulo.Location = new System.Drawing.Point(43, 268);
+            this.ModificarArticulo.Location = new System.Drawing.Point(57, 330);
+            this.ModificarArticulo.Margin = new System.Windows.Forms.Padding(4);
             this.ModificarArticulo.Name = "ModificarArticulo";
-            this.ModificarArticulo.Size = new System.Drawing.Size(182, 23);
+            this.ModificarArticulo.Size = new System.Drawing.Size(243, 28);
             this.ModificarArticulo.TabIndex = 10;
             this.ModificarArticulo.Text = "Modificar Artículo";
             this.ModificarArticulo.UseVisualStyleBackColor = true;
+            this.ModificarArticulo.Click += new System.EventHandler(this.ModificarArticulo_Click);
             // 
             // EliminarArticulos
             // 
             this.EliminarArticulos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.EliminarArticulos.Location = new System.Drawing.Point(43, 317);
+            this.EliminarArticulos.Location = new System.Drawing.Point(57, 390);
+            this.EliminarArticulos.Margin = new System.Windows.Forms.Padding(4);
             this.EliminarArticulos.Name = "EliminarArticulos";
-            this.EliminarArticulos.Size = new System.Drawing.Size(182, 23);
+            this.EliminarArticulos.Size = new System.Drawing.Size(243, 28);
             this.EliminarArticulos.TabIndex = 11;
             this.EliminarArticulos.Text = "Eliminar Artículos";
             this.EliminarArticulos.UseVisualStyleBackColor = true;
@@ -105,37 +113,40 @@
             // VerDetalleArticulos
             // 
             this.VerDetalleArticulos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.VerDetalleArticulos.Location = new System.Drawing.Point(43, 371);
+            this.VerDetalleArticulos.Location = new System.Drawing.Point(57, 457);
+            this.VerDetalleArticulos.Margin = new System.Windows.Forms.Padding(4);
             this.VerDetalleArticulos.Name = "VerDetalleArticulos";
-            this.VerDetalleArticulos.Size = new System.Drawing.Size(182, 23);
+            this.VerDetalleArticulos.Size = new System.Drawing.Size(243, 28);
             this.VerDetalleArticulos.TabIndex = 12;
             this.VerDetalleArticulos.Text = "Ver Detalle de Artículos";
             this.VerDetalleArticulos.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(355, 111);
+            this.button1.Location = new System.Drawing.Point(473, 137);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(100, 28);
             this.button1.TabIndex = 13;
-            this.button1.Text = "button1";
+            this.button1.Text = "Marcas";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(355, 162);
+            this.button2.Location = new System.Drawing.Point(473, 199);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(100, 28);
             this.button2.TabIndex = 14;
-            this.button2.Text = "button2";
+            this.button2.Text = "Categorías";
             this.button2.UseVisualStyleBackColor = true;
             // 
             // frmPrincipal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Menu;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1067, 554);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.VerDetalleArticulos);
@@ -148,6 +159,7 @@
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Maestro de Artículos";
