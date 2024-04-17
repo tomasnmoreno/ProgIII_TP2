@@ -17,22 +17,7 @@ namespace WinForm1
             InitializeComponent();
         }
 
-        private void frmPrincipal_Load(object sender, EventArgs e)
-        {
-            cboMarca.Items.Add (" Listar marcas");
-            cboMarca.Items.Add (" Agregar marca");
-            cboMarca.Items.Add (" Eliminar marca ");
-            cboMarca.Items.Add (" Modificar descripción");
-
-            cboCategoria.Items.Add("Listar categorías");
-            cboCategoria.Items.Add("Agregar categorías");
-            cboCategoria.Items.Add("Eliminar categorías");
-            cboCategoria.Items.Add("Modificar descripción");
-            
-            
-
-        }
-
+       
         private void AgregarArticulo_Click(object sender, EventArgs e)
         {
             Form1 AgregarArticulo = new Form1();

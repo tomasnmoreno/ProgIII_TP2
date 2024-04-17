@@ -35,10 +35,8 @@
             this.ModificarArticulo = new System.Windows.Forms.Button();
             this.EliminarArticulos = new System.Windows.Forms.Button();
             this.VerDetalleArticulos = new System.Windows.Forms.Button();
-            this.lblMarca = new System.Windows.Forms.Label();
-            this.lblCategoria = new System.Windows.Forms.Label();
-            this.cboMarca = new System.Windows.Forms.ComboBox();
-            this.cboCategoria = new System.Windows.Forms.ComboBox();
+            this.btnMarca = new System.Windows.Forms.Button();
+            this.btnCategoria = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // TituloModulo
@@ -116,39 +114,23 @@
             this.VerDetalleArticulos.Text = "Ver Detalle de Artículos";
             this.VerDetalleArticulos.UseVisualStyleBackColor = true;
             // 
-            // lblMarca
+            // btnMarca
             // 
-            this.lblMarca.AutoSize = true;
-            this.lblMarca.Location = new System.Drawing.Point(485, 121);
-            this.lblMarca.Name = "lblMarca";
-            this.lblMarca.Size = new System.Drawing.Size(42, 13);
-            this.lblMarca.TabIndex = 13;
-            this.lblMarca.Text = "Marcas";
+            this.btnMarca.Location = new System.Drawing.Point(426, 111);
+            this.btnMarca.Name = "btnMarca";
+            this.btnMarca.Size = new System.Drawing.Size(130, 30);
+            this.btnMarca.TabIndex = 13;
+            this.btnMarca.Text = "Marcas";
+            this.btnMarca.UseVisualStyleBackColor = true;
             // 
-            // lblCategoria
+            // btnCategoria
             // 
-            this.lblCategoria.AutoSize = true;
-            this.lblCategoria.Location = new System.Drawing.Point(485, 167);
-            this.lblCategoria.Name = "lblCategoria";
-            this.lblCategoria.Size = new System.Drawing.Size(57, 13);
-            this.lblCategoria.TabIndex = 14;
-            this.lblCategoria.Text = "Categorias";
-            // 
-            // cboMarca
-            // 
-            this.cboMarca.FormattingEnabled = true;
-            this.cboMarca.Location = new System.Drawing.Point(561, 120);
-            this.cboMarca.Name = "cboMarca";
-            this.cboMarca.Size = new System.Drawing.Size(121, 21);
-            this.cboMarca.TabIndex = 15;
-            // 
-            // cboCategoria
-            // 
-            this.cboCategoria.FormattingEnabled = true;
-            this.cboCategoria.Location = new System.Drawing.Point(561, 162);
-            this.cboCategoria.Name = "cboCategoria";
-            this.cboCategoria.Size = new System.Drawing.Size(121, 21);
-            this.cboCategoria.TabIndex = 16;
+            this.btnCategoria.Location = new System.Drawing.Point(426, 155);
+            this.btnCategoria.Name = "btnCategoria";
+            this.btnCategoria.Size = new System.Drawing.Size(130, 30);
+            this.btnCategoria.TabIndex = 14;
+            this.btnCategoria.Text = "Categorias";
+            this.btnCategoria.UseVisualStyleBackColor = true;
             // 
             // frmPrincipal
             // 
@@ -156,10 +138,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Menu;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.cboCategoria);
-            this.Controls.Add(this.cboMarca);
-            this.Controls.Add(this.lblCategoria);
-            this.Controls.Add(this.lblMarca);
+            this.Controls.Add(this.btnCategoria);
+            this.Controls.Add(this.btnMarca);
             this.Controls.Add(this.VerDetalleArticulos);
             this.Controls.Add(this.EliminarArticulos);
             this.Controls.Add(this.ModificarArticulo);
@@ -173,7 +153,6 @@
             this.Name = "frmPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Maestro de Artículos";
-            this.Load += new System.EventHandler(this.frmPrincipal_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -187,9 +166,7 @@
         private System.Windows.Forms.Button ModificarArticulo;
         private System.Windows.Forms.Button EliminarArticulos;
         private System.Windows.Forms.Button VerDetalleArticulos;
-        private System.Windows.Forms.Label lblMarca;
-        private System.Windows.Forms.Label lblCategoria;
-        private System.Windows.Forms.ComboBox cboMarca;
-        private System.Windows.Forms.ComboBox cboCategoria;
+        private System.Windows.Forms.Button btnMarca;
+        private System.Windows.Forms.Button btnCategoria;
     }
 }
