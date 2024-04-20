@@ -153,9 +153,9 @@
             this.btContinuar.Name = "btContinuar";
             this.btContinuar.Size = new System.Drawing.Size(75, 23);
             this.btContinuar.TabIndex = 13;
-            this.btContinuar.Text = "Continuar";
+            this.btContinuar.Text = "Agregar";
             this.btContinuar.UseVisualStyleBackColor = false;
-            this.btContinuar.Click += new System.EventHandler(this.button1_Click);
+            this.btContinuar.Click += new System.EventHandler(this.btContinuar_Click);
             // 
             // pbImagenArticulo
             // 

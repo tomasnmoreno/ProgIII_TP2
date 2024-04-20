@@ -14,8 +14,9 @@ namespace WinForm1
         public string descripcion { get; set; }
         public Marca marca { get; set; }
         public CategoriaArticulo categoria { get; set; }
-        
-        // IMAGEN ? private string imagenUrl;
+        public string imagenUrl { get; set; }
+
+        List <string> listaImagenes = new List<string>();
         public float precio { get; set; }
     }
 

@@ -37,9 +37,10 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(564, 377);
+            this.button1.Location = new System.Drawing.Point(423, 306);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(93, 46);
+            this.button1.Size = new System.Drawing.Size(70, 37);
             this.button1.TabIndex = 0;
             this.button1.Text = "Modificar";
             this.button1.UseVisualStyleBackColor = true;
@@ -47,47 +48,52 @@
             // lblCodigo
             // 
             this.lblCodigo.AutoSize = true;
-            this.lblCodigo.Location = new System.Drawing.Point(75, 79);
+            this.lblCodigo.Location = new System.Drawing.Point(56, 64);
+            this.lblCodigo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCodigo.Name = "lblCodigo";
-            this.lblCodigo.Size = new System.Drawing.Size(116, 16);
+            this.lblCodigo.Size = new System.Drawing.Size(94, 13);
             this.lblCodigo.TabIndex = 1;
             this.lblCodigo.Text = "Código de artículo";
             // 
             // txtCodigoArticulo
             // 
-            this.txtCodigoArticulo.Location = new System.Drawing.Point(197, 76);
+            this.txtCodigoArticulo.Location = new System.Drawing.Point(154, 57);
+            this.txtCodigoArticulo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtCodigoArticulo.Name = "txtCodigoArticulo";
-            this.txtCodigoArticulo.Size = new System.Drawing.Size(100, 22);
+            this.txtCodigoArticulo.Size = new System.Drawing.Size(76, 20);
             this.txtCodigoArticulo.TabIndex = 2;
             // 
             // btnBuscarArticulo
             // 
-            this.btnBuscarArticulo.Location = new System.Drawing.Point(313, 66);
+            this.btnBuscarArticulo.Location = new System.Drawing.Point(253, 53);
+            this.btnBuscarArticulo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnBuscarArticulo.Name = "btnBuscarArticulo";
-            this.btnBuscarArticulo.Size = new System.Drawing.Size(133, 32);
+            this.btnBuscarArticulo.Size = new System.Drawing.Size(100, 26);
             this.btnBuscarArticulo.TabIndex = 3;
             this.btnBuscarArticulo.Text = "Buscar Artículo";
             this.btnBuscarArticulo.UseVisualStyleBackColor = true;
             // 
             // btnCancelarBusqueda
             // 
-            this.btnCancelarBusqueda.Location = new System.Drawing.Point(672, 377);
+            this.btnCancelarBusqueda.Location = new System.Drawing.Point(504, 306);
+            this.btnCancelarBusqueda.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnCancelarBusqueda.Name = "btnCancelarBusqueda";
-            this.btnCancelarBusqueda.Size = new System.Drawing.Size(93, 46);
+            this.btnCancelarBusqueda.Size = new System.Drawing.Size(70, 37);
             this.btnCancelarBusqueda.TabIndex = 4;
             this.btnCancelarBusqueda.Text = "Cancelar";
             this.btnCancelarBusqueda.UseVisualStyleBackColor = true;
             // 
             // frmModificarArticulo
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(600, 366);
             this.Controls.Add(this.btnCancelarBusqueda);
             this.Controls.Add(this.btnBuscarArticulo);
             this.Controls.Add(this.txtCodigoArticulo);
             this.Controls.Add(this.lblCodigo);
             this.Controls.Add(this.button1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "frmModificarArticulo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Modificación de Articulos";

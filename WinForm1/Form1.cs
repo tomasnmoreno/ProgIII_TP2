@@ -27,7 +27,7 @@ namespace WinForm1
             cbbCategoria.Items.Add("Bazar");
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btContinuar_Click(object sender, EventArgs e)
         {
             Articulo art = new Articulo();
 
