@@ -30,7 +30,7 @@ namespace WinForm1
         private void btContinuar_Click(object sender, EventArgs e)
         {
             Articulo art = new Articulo();
-
+            /*
             //copiar contenido txtbCodigo
             art.codigo = txtbCodigo.Text;
             //copiar contenido txtbNombre
@@ -44,7 +44,7 @@ namespace WinForm1
             //copiar contenido cbbCategoria
             //art.categoria = ;
             //guardar imagen de articulo de pbImagenArticulo
-
+            */
         }
     }
 }
