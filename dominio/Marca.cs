@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WinForm1
+namespace dominio
 {
-    internal class Marca
+    public class Marca
     {
         private int ID;
         private string descripcion;

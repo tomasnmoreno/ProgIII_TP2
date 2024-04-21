@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WinForm1
+namespace dominio
 {
-    internal class Articulo
+    public class Articulo
     {
         public string codigo { get; set; }
         public string nombre { get; set; }

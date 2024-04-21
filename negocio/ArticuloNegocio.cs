@@ -5,11 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.CodeDom;
-using System.Windows.Forms;
+//using System.Windows.Forms;
+using dominio;
 
-namespace WinForm1
+namespace negocio
 {
-    internal class ArticuloNegocio
+    public class ArticuloNegocio
     {
         public List<Articulo> listar()
         {
@@ -20,7 +21,7 @@ namespace WinForm1
 
             try
             {
-                conn.ConnectionString = "server=DESKTOP-NVCUBBL\\SQLEXPRESS; database=CATALOGO_P3_DB; integrated security=true";
+                conn.ConnectionString = "server=.\\DEVELOP; database=CATALOGO_P3_DB; integrated security=true";
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.CommandText = "select Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio from ARTICULOS";
                 cmd.Connection = conn;
@@ -47,7 +48,7 @@ namespace WinForm1
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error");
+                //MessageBox.Show("Error");
                 throw ex;
             }
             finally

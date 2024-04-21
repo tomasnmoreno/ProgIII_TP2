@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WinForm1
+namespace dominio
 {
-    internal class CategoriaArticulo
+    public class CategoriaArticulo
     {
         public int ID { get; set; }
 
