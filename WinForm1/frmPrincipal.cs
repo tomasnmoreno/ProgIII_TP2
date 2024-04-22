@@ -20,7 +20,7 @@ namespace WinForm1
        
         private void AgregarArticulo_Click(object sender, EventArgs e)
         {
-            Form1 AgregarArticulo = new Form1();
+            frmAgregarArticulo AgregarArticulo = new frmAgregarArticulo();
             AgregarArticulo.ShowDialog();
 
         }

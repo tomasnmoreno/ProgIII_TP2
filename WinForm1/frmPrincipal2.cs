@@ -20,8 +20,29 @@ namespace WinForm1
 
         private void frmPrincipal2_Load(object sender, EventArgs e)
         {
+            cargar();           
+        }
+
+        private void cargar()
+        {
             ArticuloNegocio negocio = new ArticuloNegocio();
-            dgvArticulos.DataSource = negocio.listar();
+            try
+            {
+                dgvArticulos.DataSource = negocio.listar();
+                dgvArticulos.Columns["imagenUrl"].Visible = false;
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            frmAgregarArticulo alta = new frmAgregarArticulo();
+            alta.ShowDialog();  
+            cargar();
         }
     }
 }

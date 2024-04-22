@@ -13,11 +13,12 @@ namespace dominio
         public string nombre { get; set; }
         public string descripcion { get; set; }
 
-        public int marca { get; set; }
-        //public Marca marca { get; set; }
+        //public int marca { get; set; }
+        public Marca marca { get; set; }
 
-        public int categoria { get; set; }
-        //public CategoriaArticulo categoria { get; set; }
+        //public int categoria { get; set; }
+        
+        public CategoriaArticulo categoria { get; set; }
         public string imagenUrl { get; set; }
 
         //List <string> listaImagenes = new List<string>();

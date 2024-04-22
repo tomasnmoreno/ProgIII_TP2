@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.CodeDom;
-//using System.Windows.Forms;
 using dominio;
+using System.Runtime.Remoting.Messaging;
+using System.Security.Cryptography.X509Certificates;
 
 namespace negocio
 {
@@ -14,48 +15,62 @@ namespace negocio
     {
         public List<Articulo> listar()
         {
-            List<Articulo> listaArticulo = new List<Articulo>();
-            SqlConnection conn = new SqlConnection();
-            SqlCommand cmd = new SqlCommand();
-            SqlDataReader reader;
+            List<Articulo> listaArticulos = new List<Articulo>();
+            AccesoDatos datos = new AccesoDatos();  
 
             try
             {
-                conn.ConnectionString = "server=.\\DEVELOP; database=CATALOGO_P3_DB; integrated security=true";
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.CommandText = "select Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio from ARTICULOS";
-                cmd.Connection = conn;
+                datos.setQuery("SELECT A.Codigo, A.Nombre, A.Descripcion, M.Descripcion as Marca, C.Descripcion as Categoria, A.Precio FROM ARTICULOS A INNER JOIN MARCAS M ON A.IdMarca = M.Id INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id");
+                datos.leer();
 
-                conn.Open();
-                reader = cmd.ExecuteReader();
-
-                while (reader.Read())
+                while(datos.Reader.Read())
                 {
                     Articulo aux = new Articulo();
-                    //aux.codigo = (int)reader["Codigo"];
-                    aux.codigo = reader.GetString(0);
-                    aux.nombre = reader.GetString(1);
-                    aux.descripcion = reader.GetString(2);
-                    aux.marca = reader.GetInt32(3);
-                    aux.categoria = reader.GetInt32(4);
-                    aux.precio = reader.GetSqlMoney(5);
+                    aux.codigo = datos.Reader.GetString(0);
+                    aux.nombre = datos.Reader.GetString(1);
+                    aux.descripcion = datos.Reader.GetString(2);
+                    aux.marca = new Marca();
+                    aux.marca.descripcion = datos.Reader.GetString(3);
+                    aux.categoria = new CategoriaArticulo();
+                    aux.categoria.descripcion = datos.Reader.GetString(4);
+                    aux.precio = datos.Reader.GetSqlMoney(5);
 
-                    listaArticulo.Add(aux);
+                    listaArticulos.Add(aux);
                 }
 
-                //conn.Close(); 
-                return listaArticulo;
+                return listaArticulos;
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("Error");
                 throw ex;
             }
             finally
             {
-                conn.Close ();
+                datos.cerrarConexion();
             }
             
+        }
+
+        public void agregarArticulo(Articulo newArt)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setQuery("insert into articulos (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) values ('" + newArt.codigo + "', '" + newArt.nombre + "', '" + newArt.descripcion + "', @idMarca, @idCategoria, '" + newArt.precio + "')");
+                datos.setearParametro("@idMarca", newArt.marca.id);
+                datos.setearParametro("@idCategoria", newArt.categoria.id);
+                datos.escribir();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
         }
     }
 }
