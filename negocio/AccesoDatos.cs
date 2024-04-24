@@ -20,7 +20,7 @@ namespace negocio
         
         public AccesoDatos()
         {
-            conn = new SqlConnection("server=.\\DEVELOP; database=CATALOGO_P3_DB; integrated security=true");
+            conn = new SqlConnection("server=.\\SQLEXPRESS; database=CATALOGO_P3_DB; integrated security=true");
             cmd = new SqlCommand();
         }
 
@@ -68,6 +68,7 @@ namespace negocio
                 reader.Close();
             conn.Close();   
         }
+
         public void setearParametro(string nombre, object valor)
         {
             cmd.Parameters.AddWithValue(nombre, valor);

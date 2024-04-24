@@ -49,6 +49,7 @@ namespace WinForm1
                 newArt.marca = (Marca)cboMarca.SelectedItem;
                 newArt.categoria = (CategoriaArticulo)cboCategoria.SelectedItem;
                 newArt.precio = SqlMoney.Parse(txtbPrecio.Text);
+                newArt.imagenUrl = txtbImagenUrl.Text;
 
                 negocio.agregarArticulo(newArt);
                 MessageBox.Show("Artículo agregado exitosamente.");
@@ -80,6 +81,23 @@ namespace WinForm1
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void cargarImagen(string imagen)
+        {
+            try
+            {
+                pbxArticulo.Load(imagen);
+            }
+            catch (Exception)
+            {
+                pbxArticulo.Load("https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg");
+            }
+        }
+
+        private void txtbImagenUrl_Leave(object sender, EventArgs e)
+        {
+            cargarImagen(txtbImagenUrl.Text);
         }
     }
 }

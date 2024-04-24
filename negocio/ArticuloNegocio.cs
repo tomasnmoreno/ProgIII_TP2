@@ -8,6 +8,7 @@ using System.CodeDom;
 using dominio;
 using System.Runtime.Remoting.Messaging;
 using System.Security.Cryptography.X509Certificates;
+using System.Reflection;
 
 namespace negocio
 {
@@ -20,7 +21,8 @@ namespace negocio
 
             try
             {
-                datos.setQuery("SELECT A.Codigo, A.Nombre, A.Descripcion, M.Descripcion as Marca, C.Descripcion as Categoria, A.Precio FROM ARTICULOS A INNER JOIN MARCAS M ON A.IdMarca = M.Id INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id");
+                //Query anterior: SELECT A.Codigo, A.Nombre, A.Descripcion, M.Descripcion as Marca, C.Descripcion as Categoria, A.Precio FROM ARTICULOS A INNER JOIN MARCAS M ON A.IdMarca = M.Id INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id
+                datos.setQuery("SELECT A.Codigo, A.Nombre, A.Descripcion, M.Descripcion as Marca, C.Descripcion as Categoria, A.Precio, I.ImagenUrl FROM ARTICULOS A INNER JOIN MARCAS M ON A.IdMarca = M.Id INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id INNER JOIN IMAGENES I ON I.IdArticulo = A.Id");
                 datos.leer();
 
                 while(datos.Reader.Read())
@@ -34,6 +36,11 @@ namespace negocio
                     aux.categoria = new CategoriaArticulo();
                     aux.categoria.descripcion = datos.Reader.GetString(4);
                     aux.precio = datos.Reader.GetSqlMoney(5);
+                    if (!(datos.Reader["ImagenUrl"] is DBNull))
+                    {
+                        aux.imagenUrl = datos.Reader.GetString(6);
+                    }
+
 
                     listaArticulos.Add(aux);
                 }
@@ -57,7 +64,11 @@ namespace negocio
 
             try
             {
-                datos.setQuery("insert into articulos (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) values ('" + newArt.codigo + "', '" + newArt.nombre + "', '" + newArt.descripcion + "', @idMarca, @idCategoria, '" + newArt.precio + "')");
+                /* QUERY LU: datos.setQuery("insert into articulos (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) values ('" + newArt.codigo + "', '" + newArt.nombre + "', '" + newArt.descripcion + "', @idMarca, @idCategoria, '" + newArt.precio + "')"); */
+                datos.setQuery("DECLARE @IdUltimo INT" + //TOMAS: EN FASE BETA
+                    "insert into articulos (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) values ('" + newArt.codigo + "', '" + newArt.nombre + "', '" + newArt.descripcion + "', @idMarca, @idCategoria, '" + newArt.precio + "') SET @IdUltimo = @@IDENTITY " +
+                    "INSERT INTO IMAGENES values(@IdUltimo, '" + newArt.imagenUrl + "')");
+                //NECESITO QUE GUARDE EL REGISTRO CON 'IdArticulo' CON EL {ultimoId + 1}
                 datos.setearParametro("@idMarca", newArt.marca.id);
                 datos.setearParametro("@idCategoria", newArt.categoria.id);
                 datos.escribir();
