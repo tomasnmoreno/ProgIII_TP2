@@ -15,9 +15,18 @@ namespace WinForm1
 {
     public partial class frmAgregarArticulo : Form
     {
+        private Articulo articulo = null;
+
         public frmAgregarArticulo()
         {
             InitializeComponent();
+        }
+
+        public frmAgregarArticulo(Articulo articulo)
+        {
+            InitializeComponent();
+            this.articulo = articulo;
+            Text = "Modificar Articulo";
         }
 
         private void frmAgregarArticulo_Load(object sender, EventArgs e)
@@ -25,10 +34,29 @@ namespace WinForm1
             MarcaNegocio marcaNegocio = new MarcaNegocio();
             CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
 
+
             try
             {
                 cboMarca.DataSource = marcaNegocio.listar();
+                cboMarca.ValueMember = "id"; //para que cargue los listas despl de Marca. Separo en Value(que campo mira del obj marca)
+                cboMarca.DisplayMember = "descripcion"; // Separo Display = que campo muestra del objeto marca
                 cboCategoria.DataSource = categoriaNegocio.listar();
+                cboCategoria.ValueMember = "id";
+                cboCategoria.DisplayMember = "descripcion";
+
+   
+                if(articulo != null)
+                {
+                txtbCodigo.Text = articulo.codigo;
+                txtbNombre.Text = articulo.nombre;
+                txtbDescripcion.Text = articulo.descripcion;
+                txtbPrecio.Text = articulo.precio.ToString();
+                txtbImagenUrl.Text = articulo.imagenUrl;
+                cargarImagen(articulo.imagenUrl);
+                cboMarca.SelectedValue = articulo.marca.id;
+                cboCategoria.SelectedValue = articulo.categoria.id;
+                }
+
             }
             catch (Exception ex)
             {
@@ -38,22 +66,34 @@ namespace WinForm1
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
-            Articulo newArt = new Articulo();
+            //Articulo newArt = new Articulo(); Ya lo agregue como PROPIEDAD en LINEA 18
             ArticuloNegocio negocio = new ArticuloNegocio();
 
             try
             {
-                newArt.codigo = txtbCodigo.Text;
-                newArt.nombre = txtbNombre.Text;
-                newArt.descripcion = txtbDescripcion.Text;
-                newArt.marca = (Marca)cboMarca.SelectedItem;
-                newArt.categoria = (CategoriaArticulo)cboCategoria.SelectedItem;
-                newArt.precio = SqlMoney.Parse(txtbPrecio.Text);
-                newArt.imagenUrl = txtbImagenUrl.Text;
+                if (articulo == null) //Esto seria para que valide cuando Modifica, ya que esta en null solo cuando se va a agregar, sino estaria cargado con el articulo seleccionado LINEA 28
+                    articulo = new Articulo();
 
-                negocio.agregarArticulo(newArt);
+                articulo.codigo = txtbCodigo.Text;
+                articulo.nombre = txtbNombre.Text;
+                articulo.descripcion = txtbDescripcion.Text;
+                articulo.marca = (Marca)cboMarca.SelectedItem;
+                articulo.categoria = (CategoriaArticulo)cboCategoria.SelectedItem;
+                articulo.precio = SqlMoney.Parse(txtbPrecio.Text);
+                articulo.imagenUrl = txtbImagenUrl.Text;
+
+                if(articulo.id != 0)
+                {
+                    negocio.modificarArticulo(articulo);
+                    MessageBox.Show("Articulo modificado exitosamente");
+                    Close();
+                }
+                else
+                {
+                negocio.agregarArticulo(articulo);
                 MessageBox.Show("Artículo agregado exitosamente.");
                 Close();
+                }
             }
             catch (Exception ex)
             {
