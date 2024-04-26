@@ -35,6 +35,7 @@ namespace WinForm1
 
                 dgvArticulos.DataSource = listaArticulos;
                 dgvArticulos.Columns["imagenUrl"].Visible = false;
+                dgvArticulos.Columns["id"].Visible = false;
                 pbxArticulo.Load(listaArticulos[0].imagenUrl);
             }
             catch (Exception ex)

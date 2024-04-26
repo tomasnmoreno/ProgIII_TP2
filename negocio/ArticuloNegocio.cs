@@ -22,8 +22,9 @@ namespace negocio
 
             try
             {
-                datos.setQuery("SELECT A.Codigo Codigo, A.Nombre Nombre, A.Descripcion Descripcion, M.Id IdMarca , M.Descripcion Marca, C.Id IdCategoria, C.Descripcion Categoria, A.Precio Precio, I.ImagenUrl ImagenUrl, A.Id FROM ARTICULOS A INNER JOIN MARCAS M ON A.IdMarca = M.Id INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id INNER JOIN IMAGENES I ON I.IdArticulo = A.Id");
-                // NUEVA QUERY EN PROCESO, NECESITO UNA SOLA FILA POR CADA CODIGO//datos.setQuery("  SELECT A.Codigo Codigo, A.Nombre Nombre, A.Descripcion Descripcion, M.Id IdMarca , M.Descripcion Marca, C.Id IdCategoria, C.Descripcion Categoria, A.Precio Precio, MAX(I.ImagenUrl) as ImagenUrl, A.Id   FROM ARTICULOS A  LEFT JOIN IMAGENES I ON I.IdArticulo = A.Id LEFT JOIN MARCAS M ON A.IdMarca = M.Id  LEFT JOIN CATEGORIAS C ON A.IdCategoria = C.Id  group by A.Codigo, A.Nombre, A.Descripcion, M.Id, M.Descripcion, C.Id, C.Descripcion, A.Precio, A.Id");
+                //datos.setQuery("SELECT A.Codigo Codigo, A.Nombre Nombre, A.Descripcion Descripcion, M.Id IdMarca , M.Descripcion Marca, C.Id IdCategoria, C.Descripcion Categoria, A.Precio Precio, I.ImagenUrl ImagenUrl, A.Id FROM ARTICULOS A INNER JOIN MARCAS M ON A.IdMarca = M.Id INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id INNER JOIN IMAGENES I ON I.IdArticulo = A.Id");
+                // NUEVA QUERY EN PROCESO, NECESITO UNA SOLA FILA POR CADA CODIGO//
+                datos.setQuery("  SELECT A.Codigo Codigo, A.Nombre Nombre, A.Descripcion Descripcion, M.Id IdMarca , M.Descripcion Marca, C.Id IdCategoria, C.Descripcion Categoria, A.Precio Precio, MAX(I.ImagenUrl) as ImagenUrl, A.Id   FROM ARTICULOS A  LEFT JOIN IMAGENES I ON I.IdArticulo = A.Id LEFT JOIN MARCAS M ON A.IdMarca = M.Id  LEFT JOIN CATEGORIAS C ON A.IdCategoria = C.Id  group by A.Codigo, A.Nombre, A.Descripcion, M.Id, M.Descripcion, C.Id, C.Descripcion, A.Precio, A.Id order by A.Id");
                 datos.leer();
 
                 while (datos.Reader.Read())
@@ -52,11 +53,18 @@ namespace negocio
                     aux.marca.id = (int)datos.Reader["IdMarca"];
                     aux.marca.descripcion = (string)datos.Reader["Marca"];
                     aux.categoria = new CategoriaArticulo();
-                    aux.categoria.id = (int)datos.Reader["IdCategoria"];
+                    if (!(datos.Reader["IdCategoria"] is DBNull))
+                    {
+                        aux.categoria.id = (int)datos.Reader["IdCategoria"];
+                    }
+                    if (!(datos.Reader["Categoria"] is DBNull))
+                    {
                     aux.categoria.descripcion = (string)datos.Reader["Categoria"];
+                    }
+                    else{ aux.categoria.descripcion = "N/A"; }
                     aux.precio = datos.Reader.GetSqlMoney(7);
                     //aux.precio = (SqlMoney)datos.Reader["Precio"];
-                    if (!(datos.Reader["ImagenUrl"] is DBNull))
+                    if(!(datos.Reader["ImagenUrl"] is DBNull))
                     {
                         aux.imagenUrl = (string)datos.Reader["ImagenUrl"];
                     }
@@ -94,7 +102,7 @@ namespace negocio
 
             try
             {
-                int idUltimo = ultimoIdArticulo();
+                int idUltimo = ultimoIdArticulo(); //Ultimo hasta el momento 
 
                 datos.setQuery("insert into articulos (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) values ('" + newArt.codigo + "', '" + newArt.nombre + "', '" + newArt.descripcion + "', @idMarca, @idCategoria, '" + newArt.precio + "')");
 
@@ -145,7 +153,7 @@ namespace negocio
                 datos.setQuery("UPDATE IMAGENES SET IdArticulo = @IdArticulo, ImagenUrl = @ImagenUrl where IdArticulo = @idWhere");
                 datos.setearParametro("IdArticulo", articulo.id);
                 datos.setearParametro("@ImagenUrl", articulo.imagenUrl);
-                datos.setearParametro("@idWhere", articulo.id ); //Me guarda un nuevo registro para ese articulo 
+                datos.setearParametro("@idWhere", articulo.id ); 
                 datos.escribir();
             }
             catch (Exception)
