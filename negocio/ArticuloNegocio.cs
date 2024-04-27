@@ -24,7 +24,7 @@ namespace negocio
             {
                 //ME MUESTRA VARIOS ART //datos.setQuery("SELECT A.Codigo Codigo, A.Nombre Nombre, A.Descripcion Descripcion, M.Id IdMarca , M.Descripcion Marca, C.Id IdCategoria, C.Descripcion Categoria, A.Precio Precio, I.ImagenUrl ImagenUrl, A.Id FROM ARTICULOS A INNER JOIN MARCAS M ON A.IdMarca = M.Id INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id INNER JOIN IMAGENES I ON I.IdArticulo = A.Id");
                 // NUEVA QUERY EN PROCESO, NECESITO UNA SOLA FILA POR CADA CODIGO//
-                datos.setQuery("  SELECT A.Codigo Codigo, A.Nombre Nombre, A.Descripcion Descripcion, M.Id IdMarca , M.Descripcion Marca, C.Id IdCategoria, C.Descripcion Categoria, A.Precio Precio, MAX(I.ImagenUrl) as ImagenUrl, A.Id   FROM ARTICULOS A  LEFT JOIN IMAGENES I ON I.IdArticulo = A.Id INNER JOIN MARCAS M ON A.IdMarca = M.Id  INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id  group by A.Codigo, A.Nombre, A.Descripcion, M.Id, M.Descripcion, C.Id, C.Descripcion, A.Precio, A.Id order by A.Id");
+                datos.setQuery("SELECT A.Codigo Codigo, A.Nombre Nombre, A.Descripcion Descripcion, M.Id IdMarca , M.Descripcion Marca, C.Id IdCategoria, C.Descripcion Categoria, A.Precio Precio, MAX(I.ImagenUrl) as ImagenUrl, A.Id   FROM ARTICULOS A  LEFT JOIN IMAGENES I ON I.IdArticulo = A.Id INNER JOIN MARCAS M ON A.IdMarca = M.Id  INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id  group by A.Codigo, A.Nombre, A.Descripcion, M.Id, M.Descripcion, C.Id, C.Descripcion, A.Precio, A.Id order by A.Id");
                 datos.leer();
 
                 while (datos.Reader.Read())
@@ -68,7 +68,6 @@ namespace negocio
             }
             
         }
-
         private int ultimoIdArticulo()
         {
             int idUltimo;
@@ -90,7 +89,6 @@ namespace negocio
                 int idUltimo = ultimoIdArticulo(); //Ultimo hasta el momento, o sea el que acabo de guardar 
 
                 datos.setQuery("insert into articulos (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) values ('" + newArt.codigo + "', '" + newArt.nombre + "', '" + newArt.descripcion + "', @idMarca, @idCategoria, '" + newArt.precio + "')");
-
                 datos.setearParametro("@idMarca", newArt.marca.id);
                 datos.setearParametro("@idCategoria", newArt.categoria.id);
                 datos.escribir();
@@ -194,5 +192,101 @@ namespace negocio
 
         }
 
+        public List<Articulo> filtrar(string campo, string criterio, string filtro)
+        {
+            List<Articulo> listaFiltrada = new List<Articulo>();
+            AccesoDatos datos = new AccesoDatos();
+            
+            try
+            {
+                string query = "";
+                switch (campo)
+                {
+                    case "Precio":
+                        switch (criterio)
+                        {
+                            case "Mayor que":
+                                query = "SELECT A.Codigo Codigo, A.Nombre Nombre, A.Descripcion Descripcion, M.Id IdMarca , M.Descripcion Marca, C.Id IdCategoria, C.Descripcion Categoria, A.Precio Precio, MAX(I.ImagenUrl) as ImagenUrl, A.Id  FROM ARTICULOS A LEFT JOIN IMAGENES I ON I.IdArticulo = A.Id INNER JOIN MARCAS M ON A.IdMarca = M.Id  INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id  WHERE A.Precio > " + filtro + " group by A.Codigo, A.Nombre, A.Descripcion, M.Id, M.Descripcion, C.Id, C.Descripcion, A.Precio, A.Id order by A.Id";
+                                break;
+                            case "Menor que":
+                                query = "SELECT A.Codigo Codigo, A.Nombre Nombre, A.Descripcion Descripcion, M.Id IdMarca , M.Descripcion Marca, C.Id IdCategoria, C.Descripcion Categoria, A.Precio Precio, MAX(I.ImagenUrl) as ImagenUrl, A.Id  FROM ARTICULOS A LEFT JOIN IMAGENES I ON I.IdArticulo = A.Id INNER JOIN MARCAS M ON A.IdMarca = M.Id  INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id  WHERE A.Precio < " + filtro + " group by A.Codigo, A.Nombre, A.Descripcion, M.Id, M.Descripcion, C.Id, C.Descripcion, A.Precio, A.Id order by A.Id";
+                                break;
+                            default:
+                                query = "SELECT A.Codigo Codigo, A.Nombre Nombre, A.Descripcion Descripcion, M.Id IdMarca , M.Descripcion Marca, C.Id IdCategoria, C.Descripcion Categoria, A.Precio Precio, MAX(I.ImagenUrl) as ImagenUrl, A.Id  FROM ARTICULOS A LEFT JOIN IMAGENES I ON I.IdArticulo = A.Id INNER JOIN MARCAS M ON A.IdMarca = M.Id  INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id  WHERE A.Precio = " + filtro + " group by A.Codigo, A.Nombre, A.Descripcion, M.Id, M.Descripcion, C.Id, C.Descripcion, A.Precio, A.Id order by A.Id";
+                                break;
+                        }
+                        break;
+
+                    case "Marca":
+                        switch (criterio)
+                        {
+                            case "Comienza con":
+                                query = "SELECT A.Codigo Codigo, A.Nombre Nombre, A.Descripcion Descripcion, M.Id IdMarca , M.Descripcion Marca, C.Id IdCategoria, C.Descripcion Categoria, A.Precio Precio, MAX(I.ImagenUrl) as ImagenUrl, A.Id  FROM ARTICULOS A LEFT JOIN IMAGENES I ON I.IdArticulo = A.Id INNER JOIN MARCAS M ON A.IdMarca = M.Id  INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id  WHERE M.Descripcion like '" + filtro + "%' group by A.Codigo, A.Nombre, A.Descripcion, M.Id, M.Descripcion, C.Id, C.Descripcion, A.Precio, A.Id order by A.Id";
+                                break;
+                            case "Termina con":
+                                query = "SELECT A.Codigo Codigo, A.Nombre Nombre, A.Descripcion Descripcion, M.Id IdMarca , M.Descripcion Marca, C.Id IdCategoria, C.Descripcion Categoria, A.Precio Precio, MAX(I.ImagenUrl) as ImagenUrl, A.Id  FROM ARTICULOS A LEFT JOIN IMAGENES I ON I.IdArticulo = A.Id INNER JOIN MARCAS M ON A.IdMarca = M.Id  INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id  WHERE M.Descripcion like '%" + filtro + "' group by A.Codigo, A.Nombre, A.Descripcion, M.Id, M.Descripcion, C.Id, C.Descripcion, A.Precio, A.Id order by A.Id";
+                                break;
+                            default:
+                                query = "SELECT A.Codigo Codigo, A.Nombre Nombre, A.Descripcion Descripcion, M.Id IdMarca , M.Descripcion Marca, C.Id IdCategoria, C.Descripcion Categoria, A.Precio Precio, MAX(I.ImagenUrl) as ImagenUrl, A.Id  FROM ARTICULOS A LEFT JOIN IMAGENES I ON I.IdArticulo = A.Id INNER JOIN MARCAS M ON A.IdMarca = M.Id  INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id  WHERE M.Descripcion like '%" + filtro + "%' group by A.Codigo, A.Nombre, A.Descripcion, M.Id, M.Descripcion, C.Id, C.Descripcion, A.Precio, A.Id order by A.Id";
+                                break;
+                        }
+                        break;
+
+                    case "Categoría":
+                        switch (criterio)
+                        {
+                            case "Comienza con":
+                                query = "SELECT A.Codigo Codigo, A.Nombre Nombre, A.Descripcion Descripcion, M.Id IdMarca , M.Descripcion Marca, C.Id IdCategoria, C.Descripcion Categoria, A.Precio Precio, MAX(I.ImagenUrl) as ImagenUrl, A.Id  FROM ARTICULOS A LEFT JOIN IMAGENES I ON I.IdArticulo = A.Id INNER JOIN MARCAS M ON A.IdMarca = M.Id  INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id  WHERE C.Descripcion like '" + filtro + "%' group by A.Codigo, A.Nombre, A.Descripcion, M.Id, M.Descripcion, C.Id, C.Descripcion, A.Precio, A.Id order by A.Id";
+                                break;
+                            case "Termina con":
+                                query = "SELECT A.Codigo Codigo, A.Nombre Nombre, A.Descripcion Descripcion, M.Id IdMarca , M.Descripcion Marca, C.Id IdCategoria, C.Descripcion Categoria, A.Precio Precio, MAX(I.ImagenUrl) as ImagenUrl, A.Id  FROM ARTICULOS A LEFT JOIN IMAGENES I ON I.IdArticulo = A.Id INNER JOIN MARCAS M ON A.IdMarca = M.Id  INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id  WHERE C.Descripcion like '%" + filtro + "' group by A.Codigo, A.Nombre, A.Descripcion, M.Id, M.Descripcion, C.Id, C.Descripcion, A.Precio, A.Id order by A.Id";
+                                break;
+                            default:
+                                query = "SELECT A.Codigo Codigo, A.Nombre Nombre, A.Descripcion Descripcion, M.Id IdMarca , M.Descripcion Marca, C.Id IdCategoria, C.Descripcion Categoria, A.Precio Precio, MAX(I.ImagenUrl) as ImagenUrl, A.Id  FROM ARTICULOS A LEFT JOIN IMAGENES I ON I.IdArticulo = A.Id INNER JOIN MARCAS M ON A.IdMarca = M.Id  INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id  WHERE C.Descripcion like '%" + filtro + "%' group by A.Codigo, A.Nombre, A.Descripcion, M.Id, M.Descripcion, C.Id, C.Descripcion, A.Precio, A.Id order by A.Id";                               
+                                break;
+                        }
+                        break;
+                }
+
+                datos.setQuery(query);
+                datos.leer();
+                while (datos.Reader.Read())
+                {
+                    Articulo aux = new Articulo();
+                    aux.id = (int)datos.Reader["Id"];
+                    aux.codigo = (string)datos.Reader["Codigo"];
+                    aux.nombre = (string)datos.Reader["Nombre"];
+                    aux.descripcion = (string)datos.Reader["Descripcion"];
+                    aux.marca = new Marca();
+                    aux.marca.id = (int)datos.Reader["IdMarca"];
+                    aux.marca.descripcion = (string)datos.Reader["Marca"];
+                    aux.categoria = new CategoriaArticulo();
+                    if (!(datos.Reader["IdCategoria"] is DBNull))
+                    {
+                        aux.categoria.id = (int)datos.Reader["IdCategoria"];
+                    }
+                    if (!(datos.Reader["Categoria"] is DBNull))
+                    {
+                        aux.categoria.descripcion = (string)datos.Reader["Categoria"];
+                    }
+                    else { aux.categoria.descripcion = "N/A"; }
+                    aux.precio = (decimal)datos.Reader.GetSqlMoney(7);
+                    if (!(datos.Reader["ImagenUrl"] is DBNull))
+                    {
+                        aux.imagenUrl = (string)datos.Reader["ImagenUrl"];
+                    }
+
+                    listaFiltrada.Add(aux);
+                }
+  
+                    return listaFiltrada;
+                                
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }

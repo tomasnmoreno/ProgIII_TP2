@@ -23,7 +23,10 @@ namespace WinForm1
 
         private void frmPrincipal2_Load(object sender, EventArgs e)
         {
-            cargar();           
+            cargar();
+            cboBusquedaCampo.Items.Add("Marca");
+            cboBusquedaCampo.Items.Add("Categoría");
+            cboBusquedaCampo.Items.Add("Precio");
         }
 
         private void cargar()
@@ -34,8 +37,7 @@ namespace WinForm1
                 listaArticulos = negocio.listar();
 
                 dgvArticulos.DataSource = listaArticulos;
-                dgvArticulos.Columns["imagenUrl"].Visible = false;
-                dgvArticulos.Columns["id"].Visible = false;
+                ocultarColumnas();
                 pbxArticulo.Load(listaArticulos[0].imagenUrl);
             }
             catch (Exception ex)
@@ -45,6 +47,12 @@ namespace WinForm1
             }
         }
 
+        private void ocultarColumnas()
+        {
+            dgvArticulos.Columns["imagenUrl"].Visible = false;
+            dgvArticulos.Columns["id"].Visible = false;
+            dgvArticulos.Columns["imagenUrl"].Visible = false;
+        }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -67,8 +75,11 @@ namespace WinForm1
 
         private void dgvArticulos_SelectionChanged(object sender, EventArgs e)
         {
-            Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
-            cargarImagen(seleccionado.imagenUrl); 
+            if(dgvArticulos.CurrentRow != null)
+            {
+                Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+                cargarImagen(seleccionado.imagenUrl);
+            }      
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
@@ -84,7 +95,6 @@ namespace WinForm1
             Close();
         }
 
-       
         private void btnEliminarFisico_Click(object sender, EventArgs e)
             {
 
@@ -102,7 +112,6 @@ namespace WinForm1
                         cargar();
                     }
 
-
                 }
                 catch (Exception ex)
                 {
@@ -110,6 +119,67 @@ namespace WinForm1
                 }
 
             }
+
+        private void txtBusqueda_TextChanged(object sender, EventArgs e)
+        {
+            List<Articulo> filtroArticulos;
+            string filtro = txtBusqueda.Text;
+
+            if (filtro != "")
+            {
+                filtroArticulos = listaArticulos.FindAll(a => a.codigo.ToUpper().Contains(filtro.ToUpper()) || a.nombre.ToUpper().Contains(filtro.ToUpper()) || a.descripcion.ToUpper().Contains(filtro.ToUpper()));
+            }
+            else
+            {
+                filtroArticulos = listaArticulos;
+            }
+
+            dgvArticulos.DataSource = null;
+            dgvArticulos.DataSource = filtroArticulos;
+            ocultarColumnas();
         }
+
+        private void cboBusquedaCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string opcion = cboBusquedaCampo.SelectedItem.ToString();
+            if(opcion == "Precio")
+            {
+                cboBusquedaCriterio.Items.Clear();
+                cboBusquedaCriterio.Items.Add("Mayor que");
+                cboBusquedaCriterio.Items.Add("Menor que");
+                cboBusquedaCriterio.Items.Add("Igual a");
+            }else
+            {
+                cboBusquedaCriterio.Items.Clear();
+                cboBusquedaCriterio.Items.Add("Comienza con");
+                cboBusquedaCriterio.Items.Add("Termina con");
+                cboBusquedaCriterio.Items.Add("Contiene");
+            }
+            
+        }
+
+        private void btnBusquedaAvanzada_Click(object sender, EventArgs e)
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            
+            try
+            {
+                //AGREGAR VALIDACION ANTE UNA BUSQUEDA VACIA
+                string campo = cboBusquedaCampo.SelectedItem.ToString();
+                string criterio = cboBusquedaCriterio.SelectedItem.ToString();
+                string filtro = txtFiltroBusqueda.Text;
+                dgvArticulos.DataSource = negocio.filtrar(campo, criterio, filtro);
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+            
+
+
+        }
+    }
 
 }
