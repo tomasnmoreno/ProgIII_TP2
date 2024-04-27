@@ -78,6 +78,11 @@ namespace WinForm1
             modificar.ShowDialog();
             cargar();
         }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 
 }

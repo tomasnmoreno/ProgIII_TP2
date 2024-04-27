@@ -22,28 +22,13 @@ namespace negocio
 
             try
             {
-                datos.setQuery("SELECT A.Codigo Codigo, A.Nombre Nombre, A.Descripcion Descripcion, M.Id IdMarca , M.Descripcion Marca, C.Id IdCategoria, C.Descripcion Categoria, A.Precio Precio, I.ImagenUrl ImagenUrl, A.Id FROM ARTICULOS A INNER JOIN MARCAS M ON A.IdMarca = M.Id INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id INNER JOIN IMAGENES I ON I.IdArticulo = A.Id");
+                //ME MUESTRA VARIOS ART //datos.setQuery("SELECT A.Codigo Codigo, A.Nombre Nombre, A.Descripcion Descripcion, M.Id IdMarca , M.Descripcion Marca, C.Id IdCategoria, C.Descripcion Categoria, A.Precio Precio, I.ImagenUrl ImagenUrl, A.Id FROM ARTICULOS A INNER JOIN MARCAS M ON A.IdMarca = M.Id INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id INNER JOIN IMAGENES I ON I.IdArticulo = A.Id");
                 // NUEVA QUERY EN PROCESO, NECESITO UNA SOLA FILA POR CADA CODIGO//
-                //datos.setQuery("  SELECT A.Codigo Codigo, A.Nombre Nombre, A.Descripcion Descripcion, M.Id IdMarca , M.Descripcion Marca, C.Id IdCategoria, C.Descripcion Categoria, A.Precio Precio, MAX(I.ImagenUrl) as ImagenUrl, A.Id   FROM ARTICULOS A  LEFT JOIN IMAGENES I ON I.IdArticulo = A.Id LEFT JOIN MARCAS M ON A.IdMarca = M.Id  LEFT JOIN CATEGORIAS C ON A.IdCategoria = C.Id  group by A.Codigo, A.Nombre, A.Descripcion, M.Id, M.Descripcion, C.Id, C.Descripcion, A.Precio, A.Id order by A.Id");
+                datos.setQuery("  SELECT A.Codigo Codigo, A.Nombre Nombre, A.Descripcion Descripcion, M.Id IdMarca , M.Descripcion Marca, C.Id IdCategoria, C.Descripcion Categoria, A.Precio Precio, MAX(I.ImagenUrl) as ImagenUrl, A.Id   FROM ARTICULOS A  LEFT JOIN IMAGENES I ON I.IdArticulo = A.Id INNER JOIN MARCAS M ON A.IdMarca = M.Id  INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id  group by A.Codigo, A.Nombre, A.Descripcion, M.Id, M.Descripcion, C.Id, C.Descripcion, A.Precio, A.Id order by A.Id");
                 datos.leer();
 
                 while (datos.Reader.Read())
                 {
-                    /*
-                    Articulo aux = new Articulo();
-                    aux.codigo = datos.Reader.GetString(0);
-                    aux.nombre = datos.Reader.GetString(1);
-                    aux.descripcion = datos.Reader.GetString(2);
-                    aux.marca = new Marca();
-                    aux.marca.descripcion = datos.Reader.GetString(4);
-                    aux.categoria = new CategoriaArticulo();
-                    aux.categoria.descripcion = datos.Reader.GetString(6);
-                    aux.precio = datos.Reader.GetSqlMoney(7);
-                    if (!(datos.Reader["ImagenUrl"] is DBNull))
-                    {
-                        aux.imagenUrl = datos.Reader.GetString(8);
-                    }
-                    */
                     Articulo aux = new Articulo();
                     aux.id = (int)datos.Reader["Id"];
                     aux.codigo = (string)datos.Reader["Codigo"];
@@ -95,13 +80,14 @@ namespace negocio
             return idUltimo;
         }
 
-        public void agregarArticulo(Articulo newArt)
+        public void agregarArticulo(Articulo newArt, List<Imagen> listaImagenes)
         {
             AccesoDatos datos = new AccesoDatos();
+            
 
             try
             {
-                int idUltimo = ultimoIdArticulo(); //Ultimo hasta el momento 
+                int idUltimo = ultimoIdArticulo(); //Ultimo hasta el momento, o sea el que acabo de guardar 
 
                 datos.setQuery("insert into articulos (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) values ('" + newArt.codigo + "', '" + newArt.nombre + "', '" + newArt.descripcion + "', @idMarca, @idCategoria, '" + newArt.precio + "')");
 
@@ -110,8 +96,16 @@ namespace negocio
                 datos.escribir();
                 datos.cerrarConexion();
 
-                datos.setQuery("INSERT INTO IMAGENES (IdArticulo, ImagenUrl) values('" + (idUltimo+1) + "', '" + newArt.imagenUrl + "')");
+
+                //Recorro la lista y guardo cada imagen del articulo en IMAGENES(Table) en un procedimiento por lote
+                int cantImg = listaImagenes.Count();
+                for (int i=0; i<cantImg; i++)
+                {
+                datos.setQuery("INSERT INTO IMAGENES (IdArticulo, ImagenUrl) values('" + (idUltimo+1) + "', '" + listaImagenes[i].url + "')");
                 datos.escribir();
+                    datos.cerrarConexion();
+                    //i++; //auemento contador para que en las sucesivas vueltas guarde el url de la imagen correspondiente a la lista
+                }
 
                 /*datos.setQuery("DECLARE @IdUltimo INT" + //TOMAS: EN FASE BETA
                     "insert into articulos (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) values ('" + newArt.codigo + "', '" + newArt.nombre + "', '" + newArt.descripcion + "', @idMarca, @idCategoria, '" + newArt.precio + "') SET @IdUltimo = @@IDENTITY " +
@@ -130,12 +124,13 @@ namespace negocio
             }
         }
 
-        public void modificarArticulo(Articulo articulo)
+        public void modificarArticulo(Articulo articulo, List<Imagen>listaImagenes)
         {
             AccesoDatos datos = new AccesoDatos();
 
             try
             {
+                //ACTUALIZO EL ARTICULO
                 datos.setQuery("UPDATE ARTICULOS SET Codigo = @codigo, Nombre = @nombre, Descripcion = @descripcion, IdMarca = @IdMarca, IdCategoria = @IdCategoria, Precio = @precio where id = @id");
 
                 datos.setearParametro("@codigo", articulo.codigo);
@@ -148,19 +143,39 @@ namespace negocio
 
                 datos.escribir();
                 datos.cerrarConexion();
+                
 
-                datos.setQuery("UPDATE IMAGENES SET IdArticulo = @IdArticulo, ImagenUrl = @ImagenUrl where IdArticulo = @idWhere");
+                //BORRO TODO PARA DESPUES CARGAR LO QUE TENGO EN LA LISTA ACTUAL
+                datos.setQuery("DELETE FROM IMAGENES where IdArticulo = '" + articulo.id +"' " );
+                datos.escribir();
+                datos.cerrarConexion();
+
+                //CARGO LISTA ACTUAL
+                /*datos.setQuery(" IMAGENES SET IdArticulo = @IdArticulo, ImagenUrl = @ImagenUrl where IdArticulo = @idWhere");
                 datos.setearParametro("IdArticulo", articulo.id);
                 datos.setearParametro("@ImagenUrl", articulo.imagenUrl);
                 datos.setearParametro("@idWhere", articulo.id ); 
-                datos.escribir();
+                datos.escribir();*/
+
+                //Recorro la lista y guardo cada imagen del articulo en IMAGENES(Table) en un procedimiento por lote
+                int cantImg = listaImagenes.Count();
+                for (int i = 0; i < cantImg; i++)
+                {
+                    datos.setQuery("INSERT INTO IMAGENES (IdArticulo, ImagenUrl) values('" + (articulo.id) + "', '" + listaImagenes[i].url + "')");
+                    datos.escribir();
+                    datos.cerrarConexion();
+                    //i++; //auemento contador para que en las sucesivas vueltas guarde el url de la imagen correspondiente a la lista
+                }
             }
             catch (Exception)
             {
 
                 throw;
             }
+            finally
+            {
+                datos.cerrarConexion();
+            }
         }
-
     }
 }
