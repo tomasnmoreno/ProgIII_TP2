@@ -57,6 +57,7 @@ namespace WinForm1
 
                 if (articulo != null)
                 {
+                    
                     txtbCodigo.Text = articulo.codigo;
                     txtbNombre.Text = articulo.nombre;
                     txtbDescripcion.Text = articulo.descripcion;
@@ -69,7 +70,8 @@ namespace WinForm1
                     dgvImagenes.DataSource = listaImagenes;
                     //imagenSelecccionada = (Imagen)dgvImagenes.CurrentRow.DataBoundItem;
                     //cargarImagen(imagenSelecccionada.url); //recibe string entonces le mando la URL de la imagen seleccionada
-                    if(listaImagenes.Any()) pbxArticulo.Load(listaImagenes[0].url);
+                    if (listaImagenes.Any()) pbxArticulo.Load(listaImagenes[0].url);
+                    dgvImagenes.Columns["url"].HeaderText = "Imagenes";
                     dgvImagenes.Columns["Id"].Visible = false;
                     dgvImagenes.Columns["IdArticulo"].Visible = false;
                 }
@@ -165,6 +167,7 @@ namespace WinForm1
                 dgvImagenes.DataSource = null;
                 dgvImagenes.DataSource = listaImagenes;
                 dgvImagenes.Refresh();
+                dgvImagenes.Columns["url"].HeaderText = "Imagenes";
                 dgvImagenes.Columns["Id"].Visible = false;
                 dgvImagenes.Columns["IdArticulo"].Visible = false;
             }
@@ -244,17 +247,33 @@ namespace WinForm1
             Imagen auxEliminada = new Imagen();
             try
             {
-                if(auxEliminada == null)
+
+
+
+                /*if(auxEliminada == null)
                 {
                     MessageBox.Show("No se puede eliminar si no ha seleccionado algo...");
                     return;
-                }
+                }*/
 
+                
+                if (!(listaImagenes.Any()) || dgvImagenes.RowCount == 0 || dgvImagenes.CurrentRow==null)
+                {
+                    MessageBox.Show("No se puede eliminar si no ha seleccionado algo...");
+                }
+                else
+                {
                 auxEliminada = (Imagen)dgvImagenes.CurrentRow.DataBoundItem;
                 listaImagenes.Remove(auxEliminada);
                 recargarDGVImagenes();
-                auxEliminada = (Imagen)dgvImagenes.Rows[0].DataBoundItem;
+
+                    if (dgvImagenes.CurrentRow!=null) //para que no se queje cuando no le quedan elementos
+                    {
+                        auxEliminada = (Imagen)dgvImagenes.Rows[0].DataBoundItem;
                 pbxArticulo.Load(auxEliminada.url);
+
+                    }
+                }
             }
             catch (Exception ex)
             {
