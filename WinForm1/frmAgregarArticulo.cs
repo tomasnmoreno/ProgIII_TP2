@@ -79,7 +79,8 @@ namespace WinForm1
                 articulo.descripcion = txtbDescripcion.Text;
                 articulo.marca = (Marca)cboMarca.SelectedItem;
                 articulo.categoria = (CategoriaArticulo)cboCategoria.SelectedItem;
-                articulo.precio = SqlMoney.Parse(txtbPrecio.Text);
+                //articulo.precio = SqlMoney.Parse(txtbPrecio.Text);
+                articulo.precio = decimal.Parse(txtbPrecio.Text);
                 articulo.imagenUrl = txtbImagenUrl.Text;
 
                 if(articulo.id != 0)

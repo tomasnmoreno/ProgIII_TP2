@@ -22,9 +22,9 @@ namespace negocio
 
             try
             {
-                //datos.setQuery("SELECT A.Codigo Codigo, A.Nombre Nombre, A.Descripcion Descripcion, M.Id IdMarca , M.Descripcion Marca, C.Id IdCategoria, C.Descripcion Categoria, A.Precio Precio, I.ImagenUrl ImagenUrl, A.Id FROM ARTICULOS A INNER JOIN MARCAS M ON A.IdMarca = M.Id INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id INNER JOIN IMAGENES I ON I.IdArticulo = A.Id");
+                datos.setQuery("SELECT A.Codigo Codigo, A.Nombre Nombre, A.Descripcion Descripcion, M.Id IdMarca , M.Descripcion Marca, C.Id IdCategoria, C.Descripcion Categoria, A.Precio Precio, I.ImagenUrl ImagenUrl, A.Id FROM ARTICULOS A INNER JOIN MARCAS M ON A.IdMarca = M.Id INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id INNER JOIN IMAGENES I ON I.IdArticulo = A.Id");
                 // NUEVA QUERY EN PROCESO, NECESITO UNA SOLA FILA POR CADA CODIGO//
-                datos.setQuery("  SELECT A.Codigo Codigo, A.Nombre Nombre, A.Descripcion Descripcion, M.Id IdMarca , M.Descripcion Marca, C.Id IdCategoria, C.Descripcion Categoria, A.Precio Precio, MAX(I.ImagenUrl) as ImagenUrl, A.Id   FROM ARTICULOS A  LEFT JOIN IMAGENES I ON I.IdArticulo = A.Id LEFT JOIN MARCAS M ON A.IdMarca = M.Id  LEFT JOIN CATEGORIAS C ON A.IdCategoria = C.Id  group by A.Codigo, A.Nombre, A.Descripcion, M.Id, M.Descripcion, C.Id, C.Descripcion, A.Precio, A.Id order by A.Id");
+                //datos.setQuery("  SELECT A.Codigo Codigo, A.Nombre Nombre, A.Descripcion Descripcion, M.Id IdMarca , M.Descripcion Marca, C.Id IdCategoria, C.Descripcion Categoria, A.Precio Precio, MAX(I.ImagenUrl) as ImagenUrl, A.Id   FROM ARTICULOS A  LEFT JOIN IMAGENES I ON I.IdArticulo = A.Id LEFT JOIN MARCAS M ON A.IdMarca = M.Id  LEFT JOIN CATEGORIAS C ON A.IdCategoria = C.Id  group by A.Codigo, A.Nombre, A.Descripcion, M.Id, M.Descripcion, C.Id, C.Descripcion, A.Precio, A.Id order by A.Id");
                 datos.leer();
 
                 while (datos.Reader.Read())
@@ -62,8 +62,7 @@ namespace negocio
                     aux.categoria.descripcion = (string)datos.Reader["Categoria"];
                     }
                     else{ aux.categoria.descripcion = "N/A"; }
-                    aux.precio = datos.Reader.GetSqlMoney(7);
-                    //aux.precio = (SqlMoney)datos.Reader["Precio"];
+                    aux.precio = (decimal)datos.Reader.GetSqlMoney(7);
                     if(!(datos.Reader["ImagenUrl"] is DBNull))
                     {
                         aux.imagenUrl = (string)datos.Reader["ImagenUrl"];

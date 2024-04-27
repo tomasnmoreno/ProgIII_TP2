@@ -46,7 +46,9 @@
             this.lblImagenUrl = new System.Windows.Forms.Label();
             this.txtbImagenUrl = new System.Windows.Forms.TextBox();
             this.pbxArticulo = new System.Windows.Forms.PictureBox();
+            this.dgvImagenes = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.pbxArticulo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvImagenes)).BeginInit();
             this.SuspendLayout();
             // 
             // lblCodigo
@@ -135,7 +137,7 @@
             // 
             this.btnConfirmar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnConfirmar.BackColor = System.Drawing.Color.White;
-            this.btnConfirmar.Location = new System.Drawing.Point(413, 363);
+            this.btnConfirmar.Location = new System.Drawing.Point(413, 566);
             this.btnConfirmar.Name = "btnConfirmar";
             this.btnConfirmar.Size = new System.Drawing.Size(89, 33);
             this.btnConfirmar.TabIndex = 7;
@@ -158,7 +160,7 @@
             this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancelar.BackColor = System.Drawing.Color.Red;
             this.btnCancelar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnCancelar.Location = new System.Drawing.Point(508, 363);
+            this.btnCancelar.Location = new System.Drawing.Point(508, 566);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(82, 33);
             this.btnCancelar.TabIndex = 8;
@@ -212,11 +214,20 @@
             this.pbxArticulo.TabIndex = 22;
             this.pbxArticulo.TabStop = false;
             // 
+            // dgvImagenes
+            // 
+            this.dgvImagenes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvImagenes.Location = new System.Drawing.Point(46, 351);
+            this.dgvImagenes.Name = "dgvImagenes";
+            this.dgvImagenes.Size = new System.Drawing.Size(535, 150);
+            this.dgvImagenes.TabIndex = 23;
+            // 
             // frmAgregarArticulo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(602, 397);
+            this.ClientSize = new System.Drawing.Size(602, 600);
+            this.Controls.Add(this.dgvImagenes);
             this.Controls.Add(this.pbxArticulo);
             this.Controls.Add(this.txtbImagenUrl);
             this.Controls.Add(this.lblImagenUrl);
@@ -241,6 +252,7 @@
             this.Text = "Agregar Artículo";
             this.Load += new System.EventHandler(this.frmAgregarArticulo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbxArticulo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvImagenes)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -266,6 +278,7 @@
         private System.Windows.Forms.Label lblImagenUrl;
         private System.Windows.Forms.TextBox txtbImagenUrl;
         private System.Windows.Forms.PictureBox pbxArticulo;
+        private System.Windows.Forms.DataGridView dgvImagenes;
     }
 }
 

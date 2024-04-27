@@ -24,7 +24,10 @@ namespace dominio
         public string imagenUrl { get; set; }
 
         //List <string> listaImagenes = new List<string>();
-        public SqlMoney precio { get; set; }
+
+        //public SqlMoney precio { get; set; }
+
+        public decimal precio { get; set; }
     }
 
 
