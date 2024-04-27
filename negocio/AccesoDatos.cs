@@ -73,6 +73,23 @@ namespace negocio
         {
             cmd.Parameters.AddWithValue(nombre, valor);
         }
+
+        public void ejecutarAccion()
+        {
+            cmd.Connection = conn;
+
+            try
+            {
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
     }
-    
+
 }

@@ -83,6 +83,33 @@ namespace WinForm1
         {
             Close();
         }
-    }
+
+       
+        private void btnEliminarFisico_Click(object sender, EventArgs e)
+            {
+
+                ArticuloNegocio negocio = new ArticuloNegocio();
+                Articulo selecionado;
+
+                try
+                {
+                    DialogResult respuesta = MessageBox.Show("¿Esta seguro que desea eliminar?", "Eliminando", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                    if (respuesta == DialogResult.Yes)
+                    {
+                        selecionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem; ;
+                        negocio.eliminar(selecionado.id);
+                        cargar();
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+
+            }
+        }
 
 }
