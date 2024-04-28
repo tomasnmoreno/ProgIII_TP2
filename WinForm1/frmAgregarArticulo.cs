@@ -76,6 +76,10 @@ namespace WinForm1
                     dgvImagenes.Columns["IdArticulo"].Visible = false;
                 }
             }
+            catch (System.Net.WebException)
+            {
+                MessageBox.Show("La imagen no puede cargarse porque no existe en la red o en su computadora.", "Error de carga de imagen", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());

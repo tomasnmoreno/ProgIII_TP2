@@ -86,7 +86,6 @@ namespace negocio
 
             try
             {
-                int idUltimo = ultimoIdArticulo(); //Ultimo hasta el momento, o sea el que acabo de guardar 
 
                 datos.setQuery("insert into articulos (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) values ('" + newArt.codigo + "', '" + newArt.nombre + "', '" + newArt.descripcion + "', @idMarca, @idCategoria, '" + newArt.precio + "')");
                 datos.setearParametro("@idMarca", newArt.marca.id);
@@ -94,12 +93,13 @@ namespace negocio
                 datos.escribir();
                 datos.cerrarConexion();
 
+                int idUltimo = ultimoIdArticulo(); //Ultimo hasta el momento, o sea el que acabo de guardar 
 
                 //Recorro la lista y guardo cada imagen del articulo en IMAGENES(Table) en un procedimiento por lote
                 int cantImg = listaImagenes.Count();
                 for (int i=0; i<cantImg; i++)
                 {
-                datos.setQuery("INSERT INTO IMAGENES (IdArticulo, ImagenUrl) values('" + (idUltimo+1) + "', '" + listaImagenes[i].url + "')");
+                datos.setQuery("INSERT INTO IMAGENES (IdArticulo, ImagenUrl) values('" + (idUltimo) + "', '" + listaImagenes[i].url + "')");
                 datos.escribir();
                     datos.cerrarConexion();
                     //i++; //auemento contador para que en las sucesivas vueltas guarde el url de la imagen correspondiente a la lista
@@ -178,16 +178,25 @@ namespace negocio
 
         public void eliminar(int id)
         {
+                AccesoDatos datos = new AccesoDatos();
             try
             {
-                AccesoDatos datos = new AccesoDatos();
                 datos.setQuery("delete from ARTICULOS where id=@id ");
                 datos.setearParametro("@id", id);
                 datos.ejecutarAccion();
+                datos.cerrarConexion();
+
+                datos.setQuery("DELETE FROM IMAGENES where IdArticulo = '" + id + "'");
+                datos.ejecutarAccion();
+                
             }
             catch (Exception ex)
             {
                 throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
             }
 
         }
