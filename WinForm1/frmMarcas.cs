@@ -14,6 +14,7 @@ namespace WinForm1
 {
     public partial class frmMarcas : Form
     {
+        private Marca marca = null;
         public frmMarcas()
         {
             InitializeComponent();
@@ -50,7 +51,14 @@ namespace WinForm1
             nuevaMarca.ShowDialog();
             cargar();
         }
-
+        private void btnModificarMarca_Click(object sender, EventArgs e)
+        {
+            Marca seleccionada;
+            seleccionada = (Marca)dgvMarcas.CurrentRow.DataBoundItem;
+            frmAgregarMarca modificarMarca = new frmAgregarMarca(seleccionada);
+            modificarMarca.ShowDialog();
+            cargar();
+        }
         private void txtFiltroMarcas_TextChanged(object sender, EventArgs e)
         {
             List<Marca> filtroMarcas;
@@ -68,7 +76,28 @@ namespace WinForm1
             dgvMarcas.DataSource = null;
             dgvMarcas.DataSource = filtroMarcas;
         }
-       
+
+        private void btnEliminarMarca_Click(object sender, EventArgs e)
+        {
+            MarcaNegocio negocio = new MarcaNegocio();
+            Marca seleccionada;
+
+            try
+            {
+                seleccionada = (Marca)dgvMarcas.CurrentRow.DataBoundItem;
+                DialogResult respuesta = MessageBox.Show("¿Desea eliminar la marca " + seleccionada.descripcion + "?","Eliminar Marca", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if(respuesta == DialogResult.Yes)
+                {
+                    negocio.eliminarMarca(seleccionada.id);
+                }
+                cargar();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
     }
 
 }

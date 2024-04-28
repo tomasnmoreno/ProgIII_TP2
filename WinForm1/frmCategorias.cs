@@ -51,6 +51,14 @@ namespace WinForm1
             nuevaCategoria.ShowDialog();
             cargar();
         }
+        private void btnModificarCategoria_Click(object sender, EventArgs e)
+        {
+            CategoriaArticulo seleccionada;
+            seleccionada = (CategoriaArticulo)dgvCategorias.CurrentRow.DataBoundItem;
+            frmAgregarCategoria modificarCategoria = new frmAgregarCategoria(seleccionada);
+            modificarCategoria.ShowDialog();
+            cargar();
+        }
 
         private void txtFiltroCategorias_TextChanged(object sender, EventArgs e)
         {
@@ -68,6 +76,28 @@ namespace WinForm1
 
             dgvCategorias.DataSource = null;
             dgvCategorias.DataSource = filtroCategorias;
+        }
+
+        private void btnEliminarCategoria_Click(object sender, EventArgs e)
+        {
+            CategoriaNegocio negocio = new CategoriaNegocio();
+            CategoriaArticulo seleccionada;
+
+            try
+            {
+                seleccionada = (CategoriaArticulo)dgvCategorias.CurrentRow.DataBoundItem;
+                DialogResult respuesta = MessageBox.Show("¿Desea eliminar la categoría " + seleccionada.descripcion + "?", "Eliminar Categoría", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if(respuesta == DialogResult.Yes)
+                {
+                    negocio.eliminarCategoria(seleccionada.id);
+                }
+                cargar();
+            }
+            catch (Exception ex)
+            {
+                    
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }

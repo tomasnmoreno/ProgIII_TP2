@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.AccessControl;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using dominio;
@@ -50,7 +51,7 @@ namespace negocio
                 if (marca.descripcion != "")
                 {
                     datos.setQuery("insert into marcas values ('" + marca.descripcion + "')");
-                    datos.escribir();
+                    datos.ejecutarAccion();
                 }
             }
             catch (Exception ex)
@@ -62,11 +63,45 @@ namespace negocio
             {
                 datos.cerrarConexion();
             }
+        }
+
+        public void modificarMarca(Marca marca)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setQuery("update marcas set descripcion = '" + marca.descripcion + "' where id = @idMarca");
+                datos.setearParametro("@idMarca", marca.id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void eliminarMarca(int id)
+        {
+            try
+            {
+                AccesoDatos datos = new AccesoDatos();
+                datos.setQuery("delete from marcas where id = @id");
+                datos.setearParametro("@id", id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
 
         }
         
-        
     }
-
-    
+  
 }
