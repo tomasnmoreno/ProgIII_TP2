@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using dominio;
@@ -40,5 +41,32 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
+        public void agregarMarca(Marca marca)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                if (marca.descripcion != "")
+                {
+                    datos.setQuery("insert into marcas values ('" + marca.descripcion + "')");
+                    datos.escribir();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+        }
+        
+        
     }
+
+    
 }
