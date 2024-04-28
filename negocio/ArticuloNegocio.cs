@@ -47,7 +47,7 @@ namespace negocio
                     aux.categoria.descripcion = (string)datos.Reader["Categoria"];
                     }
                     else{ aux.categoria.descripcion = "N/A"; }
-                    aux.precio = (decimal)datos.Reader.GetSqlMoney(7);
+                    aux.precio = (decimal)datos.Reader["Precio"];
                     if(!(datos.Reader["ImagenUrl"] is DBNull))
                     {
                         aux.imagenUrl = (string)datos.Reader["ImagenUrl"];

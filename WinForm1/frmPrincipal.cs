@@ -24,6 +24,16 @@ namespace WinForm1
         private void frmPrincipal2_Load(object sender, EventArgs e)
         {
             cargar();
+
+            if (dgvArticulos.Rows.Count > 0)
+            {
+                dgvArticulos.Rows[0].Selected = true;
+                dgvArticulos.CurrentCell = dgvArticulos.Rows[0].Cells[1];
+                dgvArticulos.Refresh();
+                /*dgvArticulos.Rows[0].Selected = true;
+                dgvArticulos.CurrentCell = dgvArticulos.Rows[0].Cells[0]; // Establecer la celda actual en la primera fila
+                dgvArticulos.FirstDisplayedScrollingRowIndex = 0; // Desplazar el DataGridView a la fila seleccionada*/
+            }
             cboBusquedaCampo.Items.Add("Marca");
             cboBusquedaCampo.Items.Add("Categoría");
             cboBusquedaCampo.Items.Add("Precio");
@@ -35,10 +45,10 @@ namespace WinForm1
             try
             {
                 listaArticulos = negocio.listar();
-
                 dgvArticulos.DataSource = listaArticulos;
+                //pbxArticulo.Load(listaArticulos[0].imagenUrl);
+
                 ocultarColumnas();
-                pbxArticulo.Load(listaArticulos[0].imagenUrl);
             }
             catch (Exception ex)
             {
@@ -87,6 +97,14 @@ namespace WinForm1
             Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
             frmAgregarArticulo modificar = new frmAgregarArticulo(seleccionado);
             modificar.ShowDialog();
+            cargar();
+        }
+
+        private void btnVerDetalle_Click(object sender, EventArgs e)
+        {
+            Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+            frmAgregarArticulo detalle = new frmAgregarArticulo(seleccionado, 1);
+            detalle.ShowDialog();
             cargar();
         }
 
@@ -158,13 +176,52 @@ namespace WinForm1
             
         }
 
+        private bool validarFiltro()
+        {
+            if(cboBusquedaCampo.SelectedIndex < 0)
+            {
+                MessageBox.Show("Por favor seleccione un campo para filtrar");
+                return true;
+            }
+            if(cboBusquedaCriterio.SelectedIndex <0)
+            {
+                MessageBox.Show("Por favor seleccione un criterio para filtrar");
+                return true;
+            }
+            if(cboBusquedaCampo.SelectedItem.ToString() == "Precio")
+            {
+                if(!(soloNumeros(txtFiltroBusqueda.Text)) || txtFiltroBusqueda.Text == "")
+                {
+                    MessageBox.Show("Solo numeros admitidos");
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private bool soloNumeros(string cadena)
+        {
+            foreach (char caracter in cadena)
+            {
+                if (!(char.IsNumber(caracter)))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         private void btnBusquedaAvanzada_Click(object sender, EventArgs e)
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
-            
+
             try
             {
                 //AGREGAR VALIDACION ANTE UNA BUSQUEDA VACIA
+                if (validarFiltro())
+                {
+                    return;
+                }
                 string campo = cboBusquedaCampo.SelectedItem.ToString();
                 string criterio = cboBusquedaCriterio.SelectedItem.ToString();
                 string filtro = txtFiltroBusqueda.Text;

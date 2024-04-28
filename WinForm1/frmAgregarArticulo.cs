@@ -4,9 +4,11 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlTypes;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Net.Security;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using dominio;
@@ -31,6 +33,26 @@ namespace WinForm1
             this.articulo = articulo;
             Text = "Modificar Articulo";
             lblTiuloArticulos.Text = "Modificar Articulo";
+        }
+
+        public frmAgregarArticulo(Articulo articulo, int detalle)
+        {
+            InitializeComponent();
+            this.articulo = articulo;
+            Text = "Detalle de Articulo";
+            lblTiuloArticulos.Text = "Detalle de Articulo";
+            
+            txtbCodigo.ReadOnly = true;
+            txtbNombre.ReadOnly = true;
+            txtbDescripcion.ReadOnly = true;
+            cboMarca.Enabled = false;
+            cboCategoria.Enabled = false;
+            txtbPrecio.ReadOnly = true;
+            txtbImagenUrl.ReadOnly = true;
+            btnAgregarImagen.Enabled = false;
+            btnEliminarImagen.Enabled = false;
+            btnConfirmar.Visible = false;
+
         }
 
         private void frmAgregarArticulo_Load(object sender, EventArgs e)
@@ -105,19 +127,16 @@ namespace WinForm1
                 articulo.descripcion = txtbDescripcion.Text;
                 articulo.marca = (Marca)cboMarca.SelectedItem;
                 articulo.categoria = (CategoriaArticulo)cboCategoria.SelectedItem;
-                //articulo.precio = SqlMoney.Parse(txtbPrecio.Text);
-                articulo.precio = decimal.Parse(txtbPrecio.Text);
-                decimal precio;
-                if (decimal.TryParse(txtbPrecio.Text.Replace('.', ','), out precio))
-                {
-                    //Asigna el precio convertido al artículo
-                    articulo.precio = precio;
-                }
-                else
+                txtbPrecio.Text = txtbPrecio.Text.Replace('.',',');
+                articulo.precio =  decimal.Parse(txtbPrecio.Text);
+
+
+
+                /*else
                 {
                     MessageBox.Show("Ingrese un precio válido.");
                     return; // Salir del método si el precio no es válido
-                }
+                }*/
 
                 //articulo.imagenUrl = txtbImagenUrl.Text; //YA TENGO LA LISTA DE IMAGENES
 
