@@ -94,18 +94,32 @@ namespace WinForm1
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
+            if (listaArticulos.Any())
+            {
             Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
             frmAgregarArticulo modificar = new frmAgregarArticulo(seleccionado);
             modificar.ShowDialog();
             cargar();
+            }
+            else
+            {
+                MessageBox.Show("No hay articulos para seleccionar");
+            }
         }
 
         private void btnVerDetalle_Click(object sender, EventArgs e)
         {
+            if (listaArticulos.Any())
+            {
             Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
             frmAgregarArticulo detalle = new frmAgregarArticulo(seleccionado, 1);
             detalle.ShowDialog();
             cargar();
+            }
+            else
+            {
+                MessageBox.Show("No hay articulos para ver");
+            }
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -118,7 +132,8 @@ namespace WinForm1
 
                 ArticuloNegocio negocio = new ArticuloNegocio();
                 Articulo selecionado;
-
+            if (listaArticulos.Any())
+            {
                 try
                 {
                     DialogResult respuesta = MessageBox.Show("¿Esta seguro que desea eliminar?", "Eliminando", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -135,8 +150,12 @@ namespace WinForm1
                 {
                     MessageBox.Show(ex.ToString());
                 }
-
             }
+            else
+            {
+                MessageBox.Show("No hay articulos para eliminar");
+            }
+        }
 
         private void txtBusqueda_TextChanged(object sender, EventArgs e)
         {
