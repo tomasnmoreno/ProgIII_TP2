@@ -44,6 +44,12 @@ namespace WinForm1
         private void frmCategorias_Load(object sender, EventArgs e)
         {
             cargar();
+            if (dgvCategorias.Rows.Count > 0)
+            {
+                dgvCategorias.Rows[0].Selected = true;
+                dgvCategorias.CurrentCell = dgvCategorias.Rows[0].Cells[1];
+                dgvCategorias.Refresh();
+            }
         }
 
         private void btnAgregarCategoria_Click(object sender, EventArgs e)
@@ -54,11 +60,18 @@ namespace WinForm1
         }
         private void btnModificarCategoria_Click(object sender, EventArgs e)
         {
+            if (listaCategorias.Any())
+            {
             CategoriaArticulo seleccionada;
             seleccionada = (CategoriaArticulo)dgvCategorias.CurrentRow.DataBoundItem;
             frmAgregarCategoria modificarCategoria = new frmAgregarCategoria(seleccionada);
             modificarCategoria.ShowDialog();
             cargar();
+            }
+            else
+            {
+                MessageBox.Show("No hay categorias para modificar");
+            }
         }
 
         private void txtFiltroCategorias_TextChanged(object sender, EventArgs e)
@@ -87,6 +100,8 @@ namespace WinForm1
 
             try
             {
+                if (listaCategorias.Any())
+                {
                 seleccionada = (CategoriaArticulo)dgvCategorias.CurrentRow.DataBoundItem;
                 DialogResult respuesta = MessageBox.Show("¿Desea eliminar la categoría " + seleccionada.descripcion + "?", "Eliminar Categoría", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if(respuesta == DialogResult.Yes)
@@ -94,6 +109,11 @@ namespace WinForm1
                     negocio.eliminarCategoria(seleccionada.id);
                 }
                 cargar();
+                }
+                else
+                {
+                    MessageBox.Show("No hay categorias para eliminar");
+                }
             }
             catch (Exception ex)
             {

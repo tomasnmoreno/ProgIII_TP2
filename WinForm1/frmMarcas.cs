@@ -40,7 +40,13 @@ namespace WinForm1
         private void frmMarcas_Load(object sender, EventArgs e)
         {
             cargar();
-            
+            if (dgvMarcas.Rows.Count > 0)
+            {
+                dgvMarcas.Rows[0].Selected = true;
+                dgvMarcas.CurrentCell = dgvMarcas.Rows[0].Cells[1];
+                dgvMarcas.Refresh();
+            }
+
         }
          private void btnMarcasSalir_Click(object sender, EventArgs e)
         {
@@ -55,11 +61,18 @@ namespace WinForm1
         }
         private void btnModificarMarca_Click(object sender, EventArgs e)
         {
+            if (listaMarcas.Any())
+            {
             Marca seleccionada;
             seleccionada = (Marca)dgvMarcas.CurrentRow.DataBoundItem;
             frmAgregarMarca modificarMarca = new frmAgregarMarca(seleccionada);
             modificarMarca.ShowDialog();
             cargar();
+            }
+            else
+            {
+                MessageBox.Show("No hay marcas para modificar");
+            }
         }
         private void txtFiltroMarcas_TextChanged(object sender, EventArgs e)
         {
@@ -87,6 +100,7 @@ namespace WinForm1
 
             try
             {
+                if (listaMarcas.Any()) { 
                 seleccionada = (Marca)dgvMarcas.CurrentRow.DataBoundItem;
                 DialogResult respuesta = MessageBox.Show("¿Desea eliminar la marca " + seleccionada.descripcion + "?","Eliminar Marca", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if(respuesta == DialogResult.Yes)
@@ -94,6 +108,11 @@ namespace WinForm1
                     negocio.eliminarMarca(seleccionada.id);
                 }
                 cargar();
+                }
+                else
+                {
+                    MessageBox.Show("No hay marcas eliminar");
+                }
             }
             catch (Exception ex)
             {
