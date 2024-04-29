@@ -45,14 +45,17 @@ namespace WinForm1
                 {
                     negocio.modificarMarca(marca);
                     MessageBox.Show("Marca modificada exitosamente.");
+                    Close();
+                }else if(marca.descripcion == ""){
+                    MessageBox.Show("Ingrese una marca correcta");
                 }
                 else
                 {
                     negocio.agregarMarca(marca);
                     MessageBox.Show("Se agregó exitosamente la marca " + marca.descripcion);
+                    Close();
                 }
-                
-                Close();
+
             }
             catch (Exception ex)
             {

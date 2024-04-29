@@ -40,14 +40,19 @@ namespace WinForm1
                 {
                     negocio.modificarCategoria(categoria);
                     MessageBox.Show("Categoría modificada exitosamente.");
+                    Close();
+                }
+                else if (categoria.descripcion == "")
+                {
+                    MessageBox.Show("Ingrese una categoría correcta");
                 }
                 else
                 {
                     negocio.agregarCategoria(categoria);
                     MessageBox.Show("Se agregó exitosamente la categoría " + categoria.descripcion);
+                    Close();
                 }
 
-                Close();
             }
             catch (Exception ex)
             {

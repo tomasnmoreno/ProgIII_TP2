@@ -103,7 +103,7 @@ namespace WinForm1
             }
             else
             {
-                MessageBox.Show("No hay articulos para seleccionar");
+                MessageBox.Show("No existen artículos para modificar.");
             }
         }
 
@@ -118,7 +118,7 @@ namespace WinForm1
             }
             else
             {
-                MessageBox.Show("No hay articulos para ver");
+                MessageBox.Show("No existen artículos para ver el detalle.");
             }
         }
 
@@ -153,7 +153,7 @@ namespace WinForm1
             }
             else
             {
-                MessageBox.Show("No hay articulos para eliminar");
+                MessageBox.Show("No existen artículos para eliminar");
             }
         }
 
@@ -199,19 +199,19 @@ namespace WinForm1
         {
             if(cboBusquedaCampo.SelectedIndex < 0)
             {
-                MessageBox.Show("Por favor seleccione un campo para filtrar");
+                MessageBox.Show("Seleccione un campo para filtrar.");
                 return true;
             }
             if(cboBusquedaCriterio.SelectedIndex <0)
             {
-                MessageBox.Show("Por favor seleccione un criterio para filtrar");
+                MessageBox.Show("Seleccione un criterio para filtrar.");
                 return true;
             }
             if(cboBusquedaCampo.SelectedItem.ToString() == "Precio")
             {
                 if(!(soloNumeros(txtFiltroBusqueda.Text)) || txtFiltroBusqueda.Text == "")
                 {
-                    MessageBox.Show("Solo numeros admitidos");
+                    MessageBox.Show("Seleccione un precio correcto.");
                     return true;
                 }
             }
@@ -264,6 +264,11 @@ namespace WinForm1
         {
             frmCategorias categorias = new frmCategorias();
             categorias.ShowDialog();
+        }
+
+        private void btnVerTodos_Click(object sender, EventArgs e)
+        {
+            cargar();
         }
     }
 
