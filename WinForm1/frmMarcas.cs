@@ -28,7 +28,8 @@ namespace WinForm1
             try
             {
                 listaMarcas = negocio.listar();
-                dgvMarcas.DataSource = listaMarcas;   
+                dgvMarcas.DataSource = listaMarcas;
+                dgvMarcas.Columns["id"].Visible = false;
             }
             catch (Exception ex)
             {
@@ -39,6 +40,7 @@ namespace WinForm1
         private void frmMarcas_Load(object sender, EventArgs e)
         {
             cargar();
+            
         }
          private void btnMarcasSalir_Click(object sender, EventArgs e)
         {
@@ -75,6 +77,7 @@ namespace WinForm1
 
             dgvMarcas.DataSource = null;
             dgvMarcas.DataSource = filtroMarcas;
+            dgvMarcas.Columns["id"].Visible = false;
         }
 
         private void btnEliminarMarca_Click(object sender, EventArgs e)

@@ -55,7 +55,7 @@
             // 
             // btnAgregarCategoria
             // 
-            this.btnAgregarCategoria.Location = new System.Drawing.Point(442, 119);
+            this.btnAgregarCategoria.Location = new System.Drawing.Point(350, 119);
             this.btnAgregarCategoria.Name = "btnAgregarCategoria";
             this.btnAgregarCategoria.Size = new System.Drawing.Size(112, 35);
             this.btnAgregarCategoria.TabIndex = 1;
@@ -65,7 +65,7 @@
             // 
             // btnModificarCategoria
             // 
-            this.btnModificarCategoria.Location = new System.Drawing.Point(442, 167);
+            this.btnModificarCategoria.Location = new System.Drawing.Point(350, 167);
             this.btnModificarCategoria.Name = "btnModificarCategoria";
             this.btnModificarCategoria.Size = new System.Drawing.Size(112, 35);
             this.btnModificarCategoria.TabIndex = 2;
@@ -75,7 +75,7 @@
             // 
             // btnEliminarCategoria
             // 
-            this.btnEliminarCategoria.Location = new System.Drawing.Point(442, 215);
+            this.btnEliminarCategoria.Location = new System.Drawing.Point(350, 215);
             this.btnEliminarCategoria.Name = "btnEliminarCategoria";
             this.btnEliminarCategoria.Size = new System.Drawing.Size(112, 35);
             this.btnEliminarCategoria.TabIndex = 3;
@@ -118,7 +118,7 @@
             // 
             this.txtFiltroCategorias.Location = new System.Drawing.Point(140, 82);
             this.txtFiltroCategorias.Name = "txtFiltroCategorias";
-            this.txtFiltroCategorias.Size = new System.Drawing.Size(170, 22);
+            this.txtFiltroCategorias.Size = new System.Drawing.Size(143, 22);
             this.txtFiltroCategorias.TabIndex = 7;
             this.txtFiltroCategorias.TextChanged += new System.EventHandler(this.txtFiltroCategorias_TextChanged);
             // 

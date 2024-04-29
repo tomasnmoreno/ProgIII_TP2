@@ -116,7 +116,7 @@
             // txtbCodigo
             // 
             this.txtbCodigo.Location = new System.Drawing.Point(155, 96);
-            this.txtbCodigo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbCodigo.Margin = new System.Windows.Forms.Padding(4);
             this.txtbCodigo.Name = "txtbCodigo";
             this.txtbCodigo.Size = new System.Drawing.Size(132, 22);
             this.txtbCodigo.TabIndex = 0;
@@ -124,7 +124,7 @@
             // txtbNombre
             // 
             this.txtbNombre.Location = new System.Drawing.Point(155, 142);
-            this.txtbNombre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbNombre.Margin = new System.Windows.Forms.Padding(4);
             this.txtbNombre.Name = "txtbNombre";
             this.txtbNombre.Size = new System.Drawing.Size(269, 22);
             this.txtbNombre.TabIndex = 1;
@@ -132,7 +132,7 @@
             // txtbDescripcion
             // 
             this.txtbDescripcion.Location = new System.Drawing.Point(155, 186);
-            this.txtbDescripcion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbDescripcion.Margin = new System.Windows.Forms.Padding(4);
             this.txtbDescripcion.Name = "txtbDescripcion";
             this.txtbDescripcion.Size = new System.Drawing.Size(269, 22);
             this.txtbDescripcion.TabIndex = 2;
@@ -140,7 +140,7 @@
             // txtbPrecio
             // 
             this.txtbPrecio.Location = new System.Drawing.Point(155, 326);
-            this.txtbPrecio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbPrecio.Margin = new System.Windows.Forms.Padding(4);
             this.txtbPrecio.Name = "txtbPrecio";
             this.txtbPrecio.Size = new System.Drawing.Size(132, 22);
             this.txtbPrecio.TabIndex = 5;
@@ -150,7 +150,7 @@
             this.btnConfirmar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnConfirmar.BackColor = System.Drawing.Color.White;
             this.btnConfirmar.Location = new System.Drawing.Point(655, 714);
-            this.btnConfirmar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnConfirmar.Margin = new System.Windows.Forms.Padding(4);
             this.btnConfirmar.Name = "btnConfirmar";
             this.btnConfirmar.Size = new System.Drawing.Size(119, 41);
             this.btnConfirmar.TabIndex = 7;
@@ -175,7 +175,7 @@
             this.btnCancelar.BackColor = System.Drawing.Color.Red;
             this.btnCancelar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnCancelar.Location = new System.Drawing.Point(781, 714);
-            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(109, 41);
             this.btnCancelar.TabIndex = 8;
@@ -216,7 +216,7 @@
             // txtbImagenUrl
             // 
             this.txtbImagenUrl.Location = new System.Drawing.Point(155, 369);
-            this.txtbImagenUrl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbImagenUrl.Margin = new System.Windows.Forms.Padding(4);
             this.txtbImagenUrl.Name = "txtbImagenUrl";
             this.txtbImagenUrl.Size = new System.Drawing.Size(269, 22);
             this.txtbImagenUrl.TabIndex = 6;
@@ -225,7 +225,7 @@
             // pbxArticulo
             // 
             this.pbxArticulo.Location = new System.Drawing.Point(569, 96);
-            this.pbxArticulo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbxArticulo.Margin = new System.Windows.Forms.Padding(4);
             this.pbxArticulo.Name = "pbxArticulo";
             this.pbxArticulo.Size = new System.Drawing.Size(296, 298);
             this.pbxArticulo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -239,7 +239,7 @@
             this.dgvImagenes.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvImagenes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvImagenes.Location = new System.Drawing.Point(61, 432);
-            this.dgvImagenes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvImagenes.Margin = new System.Windows.Forms.Padding(4);
             this.dgvImagenes.Name = "dgvImagenes";
             this.dgvImagenes.RowHeadersWidth = 51;
             this.dgvImagenes.Size = new System.Drawing.Size(484, 185);
@@ -249,7 +249,7 @@
             // btnAgregarImagen
             // 
             this.btnAgregarImagen.Location = new System.Drawing.Point(445, 367);
-            this.btnAgregarImagen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAgregarImagen.Margin = new System.Windows.Forms.Padding(4);
             this.btnAgregarImagen.Name = "btnAgregarImagen";
             this.btnAgregarImagen.Size = new System.Drawing.Size(100, 28);
             this.btnAgregarImagen.TabIndex = 24;
@@ -259,12 +259,12 @@
             // 
             // btnEliminarImagen
             // 
-            this.btnEliminarImagen.Location = new System.Drawing.Point(569, 588);
-            this.btnEliminarImagen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnEliminarImagen.Location = new System.Drawing.Point(569, 432);
+            this.btnEliminarImagen.Margin = new System.Windows.Forms.Padding(4);
             this.btnEliminarImagen.Name = "btnEliminarImagen";
-            this.btnEliminarImagen.Size = new System.Drawing.Size(100, 28);
+            this.btnEliminarImagen.Size = new System.Drawing.Size(100, 46);
             this.btnEliminarImagen.TabIndex = 25;
-            this.btnEliminarImagen.Text = "Eliminar";
+            this.btnEliminarImagen.Text = "Eliminar Imágen";
             this.btnEliminarImagen.UseVisualStyleBackColor = true;
             this.btnEliminarImagen.Click += new System.EventHandler(this.btnEliminarImagen_Click);
             // 
@@ -294,7 +294,7 @@
             this.Controls.Add(this.lblDescripcion);
             this.Controls.Add(this.lblNombre);
             this.Controls.Add(this.lblCodigo);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimumSize = new System.Drawing.Size(818, 495);
             this.Name = "frmAgregarArticulo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

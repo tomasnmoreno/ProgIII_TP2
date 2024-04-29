@@ -46,13 +46,13 @@
             this.dgvMarcas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMarcas.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvMarcas.GridColor = System.Drawing.SystemColors.Control;
-            this.dgvMarcas.Location = new System.Drawing.Point(64, 122);
+            this.dgvMarcas.Location = new System.Drawing.Point(57, 122);
             this.dgvMarcas.MultiSelect = false;
             this.dgvMarcas.Name = "dgvMarcas";
             this.dgvMarcas.RowHeadersWidth = 51;
             this.dgvMarcas.RowTemplate.Height = 24;
             this.dgvMarcas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMarcas.Size = new System.Drawing.Size(354, 296);
+            this.dgvMarcas.Size = new System.Drawing.Size(257, 296);
             this.dgvMarcas.TabIndex = 0;
             // 
             // lblTituloMarcas
@@ -67,7 +67,7 @@
             // 
             // btnAgregarMarca
             // 
-            this.btnAgregarMarca.Location = new System.Drawing.Point(436, 122);
+            this.btnAgregarMarca.Location = new System.Drawing.Point(339, 122);
             this.btnAgregarMarca.Name = "btnAgregarMarca";
             this.btnAgregarMarca.Size = new System.Drawing.Size(112, 35);
             this.btnAgregarMarca.TabIndex = 2;
@@ -77,7 +77,7 @@
             // 
             // btnModificarMarca
             // 
-            this.btnModificarMarca.Location = new System.Drawing.Point(436, 174);
+            this.btnModificarMarca.Location = new System.Drawing.Point(339, 174);
             this.btnModificarMarca.Name = "btnModificarMarca";
             this.btnModificarMarca.Size = new System.Drawing.Size(112, 35);
             this.btnModificarMarca.TabIndex = 3;
@@ -87,7 +87,7 @@
             // 
             // btnEliminarMarca
             // 
-            this.btnEliminarMarca.Location = new System.Drawing.Point(436, 226);
+            this.btnEliminarMarca.Location = new System.Drawing.Point(339, 226);
             this.btnEliminarMarca.Name = "btnEliminarMarca";
             this.btnEliminarMarca.Size = new System.Drawing.Size(112, 35);
             this.btnEliminarMarca.TabIndex = 4;
@@ -120,7 +120,7 @@
             // 
             this.txtFiltroMarcas.Location = new System.Drawing.Point(143, 82);
             this.txtFiltroMarcas.Name = "txtFiltroMarcas";
-            this.txtFiltroMarcas.Size = new System.Drawing.Size(171, 22);
+            this.txtFiltroMarcas.Size = new System.Drawing.Size(143, 22);
             this.txtFiltroMarcas.TabIndex = 7;
             this.txtFiltroMarcas.TextChanged += new System.EventHandler(this.txtFiltroMarcas_TextChanged);
             // 

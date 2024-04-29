@@ -28,6 +28,7 @@ namespace WinForm1
             {
                 listaCategorias = negocio.listar();
                 dgvCategorias.DataSource = listaCategorias;
+                dgvCategorias.Columns["id"].Visible = false;
             }
             catch (Exception ex)
             {
@@ -76,6 +77,7 @@ namespace WinForm1
 
             dgvCategorias.DataSource = null;
             dgvCategorias.DataSource = filtroCategorias;
+            dgvCategorias.Columns["id"].Visible = false;
         }
 
         private void btnEliminarCategoria_Click(object sender, EventArgs e)

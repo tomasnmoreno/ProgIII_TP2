@@ -107,8 +107,46 @@ namespace WinForm1
                 MessageBox.Show(ex.ToString());
             }
         }
+        
+        private bool validarArticulo()
+        {
+            if (txtbCodigo.Text == "")
+            {
+                MessageBox.Show("Ingrese un código de artículo.");
+                return true;
+            }
 
+            if (txtbNombre.Text == "")
+            {
+                MessageBox.Show("Ingrese un nombre de artículo.");
+                return true;
+            }
 
+            if (txtbDescripcion.Text == "")
+            {
+                MessageBox.Show("Ingrese una descripción del artículo.");
+                return true;
+            }
+            
+            if (!(soloNumeros(txtbPrecio.Text)) || txtbPrecio.Text == "")
+            {
+                MessageBox.Show("Ingrese un precio válido");
+                return true;
+            }
+            
+            return false;
+        }
+        private bool soloNumeros(string cadena)
+        {
+            foreach (char caracter in cadena)
+            {
+                if (!(char.IsNumber(caracter)))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
             //Articulo newArt = new Articulo(); Ya lo agregue como PROPIEDAD en LINEA 18
@@ -119,18 +157,19 @@ namespace WinForm1
                 if (articulo == null) //Esto seria para que valide cuando Modifica, ya que esta en null solo cuando se va a agregar, sino estaria cargado con el articulo seleccionado LINEA 28
                 articulo = new Articulo();
 
-
-
-                ///AGREGAR VALIDACIONES!!!!!!!!!!!!!!!!
-                articulo.codigo = txtbCodigo.Text;
-                articulo.nombre = txtbNombre.Text;
+                if (validarArticulo())
+                {
+                    return;
+                }
+                
+                articulo.codigo = txtbCodigo.Text;               
+                articulo.nombre = txtbNombre.Text;                               
                 articulo.descripcion = txtbDescripcion.Text;
                 articulo.marca = (Marca)cboMarca.SelectedItem;
-                articulo.categoria = (CategoriaArticulo)cboCategoria.SelectedItem;
+                articulo.categoria = (CategoriaArticulo)cboCategoria.SelectedItem;               
                 txtbPrecio.Text = txtbPrecio.Text.Replace('.',',');
                 articulo.precio =  decimal.Parse(txtbPrecio.Text);
-
-
+                
 
                 /*else
                 {
@@ -148,9 +187,9 @@ namespace WinForm1
                 }
                 else
                 {
-                negocio.agregarArticulo(articulo, listaImagenes);
-                MessageBox.Show("Artículo agregado exitosamente.");
-                Close();
+                    negocio.agregarArticulo(articulo, listaImagenes);
+                    MessageBox.Show("Artículo agregado exitosamente.");
+                    Close();
                 }
             }
             catch (Exception ex)
@@ -158,7 +197,6 @@ namespace WinForm1
                 MessageBox.Show(ex.ToString());
             }
         }
-
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             Close();
@@ -175,7 +213,6 @@ namespace WinForm1
                 pbxArticulo.Load("https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg");
             }
         }
-
         private void txtbImagenUrl_Leave(object sender, EventArgs e)
         {
             cargarImagen(txtbImagenUrl.Text);
