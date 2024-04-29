@@ -45,19 +45,21 @@
             this.dgvCategorias.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvCategorias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCategorias.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvCategorias.Location = new System.Drawing.Point(65, 119);
+            this.dgvCategorias.Location = new System.Drawing.Point(49, 97);
+            this.dgvCategorias.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgvCategorias.Name = "dgvCategorias";
             this.dgvCategorias.RowHeadersWidth = 51;
             this.dgvCategorias.RowTemplate.Height = 24;
             this.dgvCategorias.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCategorias.Size = new System.Drawing.Size(345, 319);
-            this.dgvCategorias.TabIndex = 0;
+            this.dgvCategorias.Size = new System.Drawing.Size(259, 259);
+            this.dgvCategorias.TabIndex = 4;
             // 
             // btnAgregarCategoria
             // 
-            this.btnAgregarCategoria.Location = new System.Drawing.Point(350, 119);
+            this.btnAgregarCategoria.Location = new System.Drawing.Point(262, 97);
+            this.btnAgregarCategoria.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnAgregarCategoria.Name = "btnAgregarCategoria";
-            this.btnAgregarCategoria.Size = new System.Drawing.Size(112, 35);
+            this.btnAgregarCategoria.Size = new System.Drawing.Size(84, 28);
             this.btnAgregarCategoria.TabIndex = 1;
             this.btnAgregarCategoria.Text = "Agregar";
             this.btnAgregarCategoria.UseVisualStyleBackColor = true;
@@ -65,9 +67,10 @@
             // 
             // btnModificarCategoria
             // 
-            this.btnModificarCategoria.Location = new System.Drawing.Point(350, 167);
+            this.btnModificarCategoria.Location = new System.Drawing.Point(262, 136);
+            this.btnModificarCategoria.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnModificarCategoria.Name = "btnModificarCategoria";
-            this.btnModificarCategoria.Size = new System.Drawing.Size(112, 35);
+            this.btnModificarCategoria.Size = new System.Drawing.Size(84, 28);
             this.btnModificarCategoria.TabIndex = 2;
             this.btnModificarCategoria.Text = "Modificar";
             this.btnModificarCategoria.UseVisualStyleBackColor = true;
@@ -75,9 +78,10 @@
             // 
             // btnEliminarCategoria
             // 
-            this.btnEliminarCategoria.Location = new System.Drawing.Point(350, 215);
+            this.btnEliminarCategoria.Location = new System.Drawing.Point(262, 175);
+            this.btnEliminarCategoria.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnEliminarCategoria.Name = "btnEliminarCategoria";
-            this.btnEliminarCategoria.Size = new System.Drawing.Size(112, 35);
+            this.btnEliminarCategoria.Size = new System.Drawing.Size(84, 28);
             this.btnEliminarCategoria.TabIndex = 3;
             this.btnEliminarCategoria.Text = "Eliminar";
             this.btnEliminarCategoria.UseVisualStyleBackColor = true;
@@ -87,9 +91,10 @@
             // 
             this.btnCategoriaSalir.BackColor = System.Drawing.Color.Red;
             this.btnCategoriaSalir.ForeColor = System.Drawing.Color.White;
-            this.btnCategoriaSalir.Location = new System.Drawing.Point(650, 374);
+            this.btnCategoriaSalir.Location = new System.Drawing.Point(488, 304);
+            this.btnCategoriaSalir.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnCategoriaSalir.Name = "btnCategoriaSalir";
-            this.btnCategoriaSalir.Size = new System.Drawing.Size(112, 35);
+            this.btnCategoriaSalir.Size = new System.Drawing.Size(84, 28);
             this.btnCategoriaSalir.TabIndex = 4;
             this.btnCategoriaSalir.Text = "Salir";
             this.btnCategoriaSalir.UseVisualStyleBackColor = false;
@@ -99,34 +104,37 @@
             // 
             this.lblListaCategorias.AutoSize = true;
             this.lblListaCategorias.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblListaCategorias.Location = new System.Drawing.Point(59, 20);
+            this.lblListaCategorias.Location = new System.Drawing.Point(44, 16);
+            this.lblListaCategorias.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblListaCategorias.Name = "lblListaCategorias";
-            this.lblListaCategorias.Size = new System.Drawing.Size(272, 32);
+            this.lblListaCategorias.Size = new System.Drawing.Size(213, 26);
             this.lblListaCategorias.TabIndex = 5;
             this.lblListaCategorias.Text = "Lista de categorías";
             // 
             // lblBuscarCategoria
             // 
             this.lblBuscarCategoria.AutoSize = true;
-            this.lblBuscarCategoria.Location = new System.Drawing.Point(62, 88);
+            this.lblBuscarCategoria.Location = new System.Drawing.Point(46, 72);
+            this.lblBuscarCategoria.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblBuscarCategoria.Name = "lblBuscarCategoria";
-            this.lblBuscarCategoria.Size = new System.Drawing.Size(72, 16);
+            this.lblBuscarCategoria.Size = new System.Drawing.Size(58, 13);
             this.lblBuscarCategoria.TabIndex = 6;
             this.lblBuscarCategoria.Text = "Búsqueda:";
             // 
             // txtFiltroCategorias
             // 
-            this.txtFiltroCategorias.Location = new System.Drawing.Point(140, 82);
+            this.txtFiltroCategorias.Location = new System.Drawing.Point(105, 67);
+            this.txtFiltroCategorias.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtFiltroCategorias.Name = "txtFiltroCategorias";
-            this.txtFiltroCategorias.Size = new System.Drawing.Size(143, 22);
-            this.txtFiltroCategorias.TabIndex = 7;
+            this.txtFiltroCategorias.Size = new System.Drawing.Size(108, 20);
+            this.txtFiltroCategorias.TabIndex = 0;
             this.txtFiltroCategorias.TextChanged += new System.EventHandler(this.txtFiltroCategorias_TextChanged);
             // 
             // frmCategorias
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(600, 366);
             this.Controls.Add(this.txtFiltroCategorias);
             this.Controls.Add(this.lblBuscarCategoria);
             this.Controls.Add(this.lblListaCategorias);
@@ -135,6 +143,7 @@
             this.Controls.Add(this.btnModificarCategoria);
             this.Controls.Add(this.btnAgregarCategoria);
             this.Controls.Add(this.dgvCategorias);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "frmCategorias";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Categorías";

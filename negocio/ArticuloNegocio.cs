@@ -87,9 +87,10 @@ namespace negocio
             try
             {
 
-                datos.setQuery("insert into articulos (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) values ('" + newArt.codigo + "', '" + newArt.nombre + "', '" + newArt.descripcion + "', @idMarca, @idCategoria, '" + newArt.precio + "')");
+                datos.setQuery("insert into articulos (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) values ('" + newArt.codigo + "', '" + newArt.nombre + "', '" + newArt.descripcion + "', @idMarca, @idCategoria, @precio)");
                 datos.setearParametro("@idMarca", newArt.marca.id);
                 datos.setearParametro("@idCategoria", newArt.categoria.id);
+                datos.setearParametro("@precio", newArt.precio);
                 datos.escribir();
                 datos.cerrarConexion();
 

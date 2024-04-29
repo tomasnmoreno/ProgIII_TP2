@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlTypes;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
@@ -128,7 +129,7 @@ namespace WinForm1
                 return true;
             }
             
-            if (!(soloNumeros(txtbPrecio.Text)) || txtbPrecio.Text == "")
+            if (!(soloNumeros(txtbPrecio.Text)) || txtbPrecio.Text == "" || txtbPrecio.Text == "," || txtbPrecio.Text == ".")
             {
                 MessageBox.Show("Ingrese un precio válido");
                 return true;
@@ -142,7 +143,11 @@ namespace WinForm1
             {
                 if (!(char.IsNumber(caracter)))
                 {
-                    return false;
+                    if (char.IsPunctuation(caracter))
+                    {
+                        return true;
+                    }
+                        return false;
                 }
             }
             return true;
@@ -167,7 +172,7 @@ namespace WinForm1
                 articulo.descripcion = txtbDescripcion.Text;
                 articulo.marca = (Marca)cboMarca.SelectedItem;
                 articulo.categoria = (CategoriaArticulo)cboCategoria.SelectedItem;               
-                txtbPrecio.Text = txtbPrecio.Text.Replace('.',',');
+                //txtbPrecio.Text = txtbPrecio.Text.Replace('.',',');
                 articulo.precio =  decimal.Parse(txtbPrecio.Text);
                 
 
